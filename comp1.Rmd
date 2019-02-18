@@ -417,7 +417,7 @@ We see that the argmax classifier yields a lower misclassification error on the 
 
 Here you see how to write formulas with latex (needed below)
 $$
-\hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Y}
+\hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Y axel var her}
 $$
 Test
 
@@ -430,7 +430,7 @@ $$\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)
 
 Ridge estimator:
 $$
-\widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y}
+\widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y Y}
 $$
 
 **Q19:** 
