@@ -430,7 +430,7 @@ $$\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)
 
 Ridge estimator:
 $$
-\widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y Y}
+\widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y}
 $$
 
 **Q19:** 
