@@ -417,7 +417,7 @@ We see that the argmax classifier yields a lower misclassification error on the 
 
 Here you see how to write formulas with latex (needed below)
 $$
-\hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Y}
+\hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Yyyy}
 $$
 
 **Q16:** 
