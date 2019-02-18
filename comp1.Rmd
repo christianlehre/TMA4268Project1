@@ -434,9 +434,7 @@ $$
 $$
 
 **Q19:** 
-$$
-Dette er en endring i master branch
-$$
+
 **Q20:** 
 
 **Q21:** 
