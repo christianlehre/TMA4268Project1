@@ -452,6 +452,7 @@ $$
 \end{split}
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
+
 **Q17:** 
 
 **Q18:** 
@@ -464,10 +465,11 @@ $$
 $$
 
 **Q19:** 
-spørsmål 19 er bra
+
 **Q20:** 
 
 **Q21:** 
+
 $$\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2]=[\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)$$
 
 
