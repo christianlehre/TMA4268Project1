@@ -530,11 +530,19 @@ $$
 
 **Q20:** 
 
+
 **Q21:** 
 
-$$\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2]=[\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)$$
-
-
+$$
+\begin{split}
+\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2] &= \text{E}[(Y_0)^2-2Y_0\widetilde{f}({\bf x}_0) + \widetilde{f}({\bf x}_0)^2] \\
+&= \text{E}[(Y_0)^2]-2E[Y_0\widetilde{f}({\bf x}_0)] + E[\widetilde{f}({\bf x}_0)^2] \\
+&= \text{Var}[Y_0] + \text{E}[(Y_0)]^2-2E[Y_0]E[\widetilde{f}({\bf x}_0)] + \text{Var}[\widetilde{f}({\bf x}_0)] + E[\widetilde{f}({\bf x}_0)]^2 \\
+&= \text{Var}[Y_0] + f(x_0)^2-2f(x_0)E[\widetilde{f}({\bf x}_0)] + \text{Var}[\widetilde{f}({\bf x}_0)] + E[\widetilde{f}({\bf x}_0)]^2 \\
+&= \text{Var}(\varepsilon) + \text{Var}[\widetilde{f}({\bf x}_0)] + (\text{E}[\widetilde{f}({\bf x}_0)]-f({\bf x}_0))^2 \\
+&= [\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)
+\end{split}
+$$
 ```{r}
 values=dget("https://www.math.ntnu.no/emner/TMA4268/2019v/data/BVtradeoffvalues.dd")
 X=values$X
