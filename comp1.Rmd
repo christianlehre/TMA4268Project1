@@ -450,6 +450,7 @@ $$
 &\\
 &= \sigma^2(X^TX)^{-1}
 \end{split}
+
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
 <<<<<<< HEAD
@@ -465,6 +466,7 @@ $$
     &\\
     &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
   \end{split}
+  
 $$
 <<<<<<< HEAD
 =======
@@ -477,6 +479,7 @@ $$
     &= x_0^T \sigma^2(X^TX)^{-1}x_0 \\
     &= x_0^T(X^TX)^{-1}x_0 \sigma^2
   \end{split}
+  
 $$
 
 =======
@@ -526,9 +529,33 @@ $$
 &= \sigma^2(X^TX + \lambda I)^{-1}X^TX(X^TX+\lambda I)^{-1}\\
 &\\
 \end{split}
+
 $$
 
 **Q20:** 
+Expected value and variance of $\widetilde{f}(\mathbf{x_o}) = \mathbf{x_0}^T\widetilde{\boldsymbol{\beta}}$
+Expected value
+$$
+\begin{split}
+E[\widetilde{f}(\mathbf{x_o})] &= E[\mathbf{x_0^T\widetilde{\boldsymbol{\beta}}}] \\
+&\\
+&= \mathbf{x_0^T}E[\widetilde{\boldsymbol{\beta}}]\\
+&\\
+&= \mathbf{x_0}^T(X^TX + \lambda I)^{-1}X^TX\boldsymbol{\beta}
+\end{split}
+$$
+
+Variance
+$$
+\begin{split}
+\text{Var}[\widetilde{f}(\mathbf{x_0})] &= \text{Var}[\mathbf{x_0}^T\widetilde{\boldsymbol{\beta}}] \\
+&\\
+&= \mathbf{x_0}^T\text{Var}[\widetilde{\boldsymbol{\beta}}] \\
+&\\
+&= \sigma^2\mathbf{x_0}^T(X^TX+\lambda I)^{-1}X^TX(X^TX + \lambda I)^{-1}\mathbf{x_0}
+\end{split}
+$$
+
 
 **Q21:** 
 
