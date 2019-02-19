@@ -813,22 +813,53 @@ trade-off}\label{problem-3-bias-variance-trade-off}
 
 \[
 \hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{Y}
-\] Expected value \$\$ E{[}\boldsymbol{\hat{\beta}}{]} =
-E{[}(X\textsuperscript{TX)}\{-1\})X\^{}T\mathbf{Y}{]} =
-(X\textsuperscript{TX)}\{-1\}X\^{}TE{[}\mathbf{Y}{]} =
-(X\textsuperscript{TX)}\{-1\}X\^{}TE{[}X\textbackslash{}mathbf\{\beta +
-\boldsymbol{\epsilon}{]}
+\] Expected value \[
+  \begin{split}
+    E[\boldsymbol{\hat{\beta}}] &= E[(X^TX)^{-1})X^T\mathbf{Y}]\\
+    &\\
+    &= (X^TX)^{-1}X^TE[\mathbf{Y}]\\
+    &\\
+    &= (X^TX)^{-1}X^TE[X\boldsymbol{\beta} + \boldsymbol{\epsilon}]\\
+    &\\
+    &= (X^TX)^{-1}(X^TX)(E[\boldsymbol{\beta}] + E[\boldsymbol{\epsilon}])\\
+    &\\
+    &= \boldsymbol{\beta}
+  \end{split}
+\] Where we are assuming \(\boldsymbol{\epsilon} \sim N(0,I\sigma^2)\).
 
-\$\$ \textbf{Q17:}
+\[
+\begin{split}
+\text{Cov}[\boldsymbol{\hat{\beta}}] &= \text{Cov}[(X^TX)^{-1}X^T\mathbf{Y}]\\
+&\\
+&= (X^TX)^{-1}X^T\text{Cov}[\mathbf{Y}]\bigg((X^TX)^{-1}X^T\bigg)^T\\
+&\\
+&= (X^TX)^{-1}X^T\sigma^2I\bigg((X^TX)^{-1}X^T\bigg)^T\\
+&\\
+&= (X^TX)^{-1}(X^TX)(X^TX)^{-1}\sigma^2\\
+&\\
+&= \sigma^2(X^TX)^{-1}
+\end{split}
+\] where we have used \(\text{Cov}[\mathbf{Y}] = \sigma^2I\).
+\textbf{Q17:} \[
+  \begin{split}
+    E[\hat{f}(\boldsymbol{x_0})] &= E[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
+    &\\
+    &= x_0^T E[\boldsymbol{\boldsymbol{\hat{\beta}}}] \\
+    &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
+  \end{split}
+\]
 
-\textbf{Q18:}
-\[\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)\]
+\textbf{Q18:} \[
+\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)
+\]
 
 Ridge estimator: \[
 \widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y}
 \]
 
-\textbf{Q19:} spørsmål 19 er bra \textbf{Q20:}
+\textbf{Q19:}
+
+\textbf{Q20:}
 
 \textbf{Q21:}
 \[\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2]=[\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)\]
