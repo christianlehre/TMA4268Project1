@@ -32,6 +32,7 @@ $$ \log(\text{FEV}) = \beta_0 + \beta_1AGE + \beta_2HTCM +\beta_3GENDERM  +
 
 Fitted Model:
 $$ \hat{\log(\text{FEV})} = -1.944 + 0.023AGE + 0.017HTCM + 0.029GENDERM -0.046SMOKE$$
+
 **Q2:** 
     
 * `Estimate` - in particular interpretation of `Intercept`
@@ -415,13 +416,19 @@ We see that the argmax classifier yields a lower misclassification error on the 
 
 # Problem 3: Bias-variance trade-off 
 
-Here you see how to write formulas with latex (needed below)
-$$
-\hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Y}
-$$
 
 **Q16:** 
 
+$$
+\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{Y}
+$$
+Expected value
+$$
+    E[\boldsymbol{\hat{\beta}}] = E[(X^TX)^{-1})X^T\mathbf{Y}]
+    = (X^TX)^{-1}X^TE[\mathbf{Y}]
+    = (X^TX)^{-1}X^TE[X\mathbf{\beta + \boldsymbol{\epsilon}]
+    
+$$
 **Q17:** 
 
 **Q18:** 

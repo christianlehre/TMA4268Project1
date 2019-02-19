@@ -1,0 +1,912 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Compulsory exercise 1},
+            pdfauthor={Christian Lehre, Axel R??nold \& Erik B??e},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Compulsory exercise 1}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \subtitle{TMA4268 Statistical Learning V2019}
+  \author{Christian Lehre, Axel R??nold \& Erik B??e}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{19 February, 2019}
+
+
+\begin{document}
+\maketitle
+
+\section{Problem 1: Multiple linear
+regression}\label{problem-1-multiple-linear-regression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(GLMsData)}
+\KeywordTok{data}\NormalTok{(}\StringTok{"lungcap"}\NormalTok{)}
+\NormalTok{lungcap}\OperatorTok{$}\NormalTok{Htcm=lungcap}\OperatorTok{$}\NormalTok{Ht}\OperatorTok{*}\FloatTok{2.54}
+\NormalTok{modelA =}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(FEV) }\OperatorTok{~}\StringTok{ }\NormalTok{Age }\OperatorTok{+}\StringTok{ }\NormalTok{Htcm }\OperatorTok{+}\StringTok{ }\NormalTok{Gender }\OperatorTok{+}\StringTok{ }\NormalTok{Smoke, }\DataTypeTok{data=}\NormalTok{lungcap)}
+\KeywordTok{summary}\NormalTok{(modelA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = log(FEV) ~ Age + Htcm + Gender + Smoke, data = lungcap)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.63278 -0.08657  0.01146  0.09540  0.40701 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -1.943998   0.078639 -24.721  < 2e-16 ***
+## Age          0.023387   0.003348   6.984  7.1e-12 ***
+## Htcm         0.016849   0.000661  25.489  < 2e-16 ***
+## GenderM      0.029319   0.011719   2.502   0.0126 *  
+## Smoke       -0.046067   0.020910  -2.203   0.0279 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1455 on 649 degrees of freedom
+## Multiple R-squared:  0.8106, Adjusted R-squared:  0.8095 
+## F-statistic: 694.6 on 4 and 649 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\textbf{Q1:} \newline
+Model A:
+\[ \log(\text{FEV}) = \beta_0 + \beta_1AGE + \beta_2HTCM +\beta_3GENDERM  +
+\beta_4SMOKE + \varepsilon\]
+
+Fitted Model:
+\[ \hat{\log(\text{FEV})} = -1.944 + 0.023AGE + 0.017HTCM + 0.029GENDERM -0.046SMOKE\]
+
+\textbf{Q2:}
+
+\begin{itemize}
+\item
+  \texttt{Estimate} - in particular interpretation of \texttt{Intercept}
+  \newline  Estimated regression coefficients given by
+  \[\hat{\mathbf{\beta}} = (\mathbf{X^T}\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}\].
+  \newline When increasing covariate \(x_j\) with one unit, and keeping
+  all other covariates constant, the response variable changes with a
+  factor of \(\hat{\beta_j}\). Positive estimates reduce the value of
+  the response, while negative estimates increase the value. The
+  intercept is the value of the response when all covariates are zero.
+\item
+  \texttt{Std.Error} \newline  Estimated standard deviation of the
+  estimated regression coefficients, i.e the average amount that the
+  estimated regression coefficients vary from the actual value. The
+  Std.Error is given by
+  \[\hat{\text{SD}}(\hat{\beta_j}) = \sqrt(\hat{\sigma}^2(\mathbf{X}^T\mathbf{X})^{-1}_{jj})\],
+  where \(\mathbf{X}\) is the design matrix of the regression, and
+  \(\hat{\sigma}\) is the estimated standard deviation of the response.
+\item
+  \texttt{Residual\ standard\ error} \newline
+  Estimate of the standard deviation of the error term \(\epsilon\) in
+  the regression model. The residual standard error is given by
+  \[\hat{\sigma} = \frac{RSS}{n-p-1} = \frac{\sum_{i = 1}^n(Y_i - \hat{Y_i})^2}{n-p-1}\],
+  where n is the number of observations and p is the number of
+  covariates (or predictors) in the fitted model.
+\item
+  \texttt{F-statistic} \newline
+  The F-statistic is used to test the hypothesis that all estimated
+  regression coefficients are zero, i.e to check whether there is a
+  relationship between response and predictors.
+\end{itemize}
+
+\textbf{Q3:} \newline  The proportion of variability of the model fit is
+given by the \(R^2\)-statistic. The multiple \(R^2\) will always
+increase with an increasing number of covariates, and might result in
+too optimistic model assessment.The adjusted \(R^2\) takes this into
+account, and adjust according to the number of covaraites. Thus, the
+adjusted \(R^2\)-statistic is usually the preferred measure of explained
+variability in the fitted model when doing multiple linear regression.
+
+\textbf{Q4:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\CommentTok{# residuls vs fitted}
+\KeywordTok{ggplot}\NormalTok{(modelA, }\KeywordTok{aes}\NormalTok{(.fitted, .stdresid)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{pch =} \DecValTok{21}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{, }\DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{size =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{method =} \StringTok{"loess"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Fitted values"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Standardized residuals"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Fitted values vs. Standardized residuals"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \KeywordTok{deparse}\NormalTok{(modelA}\OperatorTok{$}\NormalTok{call))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# qq-plot of residuals}
+\KeywordTok{ggplot}\NormalTok{(modelA, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ .stdresid)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_qq}\NormalTok{(}\DataTypeTok{pch =} \DecValTok{19}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_abline}\NormalTok{(}\DataTypeTok{intercept =} \DecValTok{0}\NormalTok{, }\DataTypeTok{slope =} \DecValTok{1}\NormalTok{, }\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Theoretical quantiles"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Standardized residuals"}\NormalTok{, }
+       \DataTypeTok{title =} \StringTok{"Normal Q-Q"}\NormalTok{, }\DataTypeTok{subtitle =} \KeywordTok{deparse}\NormalTok{(modelA}\OperatorTok{$}\NormalTok{call))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-2-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# normality test}
+\KeywordTok{library}\NormalTok{(nortest) }
+\KeywordTok{ad.test}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(modelA))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Anderson-Darling normality test
+## 
+## data:  rstudent(modelA)
+## A = 1.9256, p-value = 6.486e-05
+\end{verbatim}
+
+In this problem we consider two diagnostic plots, namely residuals
+vs.~fitted values and the Q-Q plot. The former plot showing residuals
+vs.~fitted values looks good. The residuals are spread seemingly random,
+and there is no evidence of a non-linear relationship between the
+response and predictors. Thus, the model is good.
+
+As for the Q-Q plot, the data quantiles seems to bend away from the
+normal quantiles at the tails. That is, the residuals are heavy-tailed
+rather than being noramlly distributed.
+
+The normality test yields a low p-value, and the normality hypothesis is
+rejected.
+
+\textbf{Q5:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelB =}\StringTok{ }\KeywordTok{lm}\NormalTok{(FEV }\OperatorTok{~}\StringTok{ }\NormalTok{Age }\OperatorTok{+}\StringTok{ }\NormalTok{Htcm }\OperatorTok{+}\StringTok{ }\NormalTok{Gender }\OperatorTok{+}\StringTok{ }\NormalTok{Smoke, }\DataTypeTok{data=}\NormalTok{lungcap)}
+\KeywordTok{summary}\NormalTok{(modelB)}
+
+\CommentTok{#make diagnostic plots for modelB}
+\CommentTok{# residuls vs fitted}
+\KeywordTok{ggplot}\NormalTok{(modelB, }\KeywordTok{aes}\NormalTok{(.fitted, .stdresid)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{pch =} \DecValTok{21}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{0}\NormalTok{, }\DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{size =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{method =} \StringTok{"loess"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Fitted values"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Standardized residuals"}\NormalTok{,}
+       \DataTypeTok{title =} \StringTok{"Fitted values vs. Standardized residuals"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \KeywordTok{deparse}\NormalTok{(modelB}\OperatorTok{$}\NormalTok{call))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# qq-plot of residuals}
+\KeywordTok{ggplot}\NormalTok{(modelB, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ .stdresid)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_qq}\NormalTok{(}\DataTypeTok{pch =} \DecValTok{19}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_abline}\NormalTok{(}\DataTypeTok{intercept =} \DecValTok{0}\NormalTok{, }\DataTypeTok{slope =} \DecValTok{1}\NormalTok{, }\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Theoretical quantiles"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Standardized residuals"}\NormalTok{, }
+       \DataTypeTok{title =} \StringTok{"Normal Q-Q"}\NormalTok{, }\DataTypeTok{subtitle =} \KeywordTok{deparse}\NormalTok{(modelB}\OperatorTok{$}\NormalTok{call))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-3-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# normality test}
+\KeywordTok{library}\NormalTok{(nortest) }
+\KeywordTok{ad.test}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(modelB))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = FEV ~ Age + Htcm + Gender + Smoke, data = lungcap)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.37656 -0.25033  0.00894  0.25588  1.92047 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -4.456974   0.222839 -20.001  < 2e-16 ***
+## Age          0.065509   0.009489   6.904 1.21e-11 ***
+## Htcm         0.041023   0.001873  21.901  < 2e-16 ***
+## GenderM      0.157103   0.033207   4.731 2.74e-06 ***
+## Smoke       -0.087246   0.059254  -1.472    0.141    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.4122 on 649 degrees of freedom
+## Multiple R-squared:  0.7754, Adjusted R-squared:  0.774 
+## F-statistic:   560 on 4 and 649 DF,  p-value: < 2.2e-16
+## 
+## 
+##  Anderson-Darling normality test
+## 
+## data:  rstudent(modelB)
+## A = 1.2037, p-value = 0.003853
+\end{verbatim}
+
+Looking at the residuals vs.~fitted values plot, one can see that the
+spread is uneven and that there is a non-linear relationship between the
+response and the covariates.
+
+As for model fit B, the Smoke covariate is no longer significant, as its
+corresponding p-value is relatively large. The coefficient of
+determination, \(R^2\), which is a measure of the explained variability
+of the model, is also lower for model B than model A. In other words,
+model A explains a greater proportion of variability than model B.
+
+The standard error, or estimated standard deviation of the estimated
+regression coefficients, are lower in model A for all covarariates.
+These quantities are used in e.g constructing confidence intervals for
+the regression coefficients. As these are lower in model A, one will
+obtain more accurate confidence intervals for \(\beta_j\) when using
+model A.
+
+When doing inference about FEV, the interpretation might be easier when
+using model B, but the accuracy is greater when using model A.
+
+\textbf{Q6:} Test if the covariate AGE has an effect on
+\(\log(\text{FEV})\), i.e conduct the following hypothesis test \[
+H_0: \beta_{\text{AGE}} = 0 \quad \text{vs.} \quad H_1: \beta_{\text{AGE}} \ne 0
+\] using a two-sided t-test based on \[
+T_{\text{AGE}} = \frac{\hat{\beta_{\text{AGE}}}-\beta_{\text{AGE}}}{\hat{SD}(\hat{\beta_{\text{AGE}}})} \sim t_{n-p-1} = t_{654-4-1}
+\] where \(\hat{\text{SD}}(\hat{\beta_j})\) is the standard error as
+explained in Q2 above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#p-value AGE}
+\NormalTok{p_AGE =}\StringTok{ }\KeywordTok{summary}\NormalTok{(modelA)}\OperatorTok{$}\NormalTok{coefficients[}\StringTok{'Age'}\NormalTok{,}\DecValTok{4}\NormalTok{]}
+
+\CommentTok{#or equivalently}
+\NormalTok{n =}\StringTok{ }\KeywordTok{dim}\NormalTok{(lungcap)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{p =}\StringTok{ }\DecValTok{4}
+\NormalTok{df =}\StringTok{ }\NormalTok{n}\OperatorTok{-}\NormalTok{p}\OperatorTok{-}\DecValTok{1}
+\NormalTok{alpha =}\StringTok{ }\FloatTok{0.05}
+\NormalTok{critical_values =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{qt}\NormalTok{(alpha}\OperatorTok{/}\DecValTok{2}\NormalTok{,df),}\KeywordTok{qt}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{alpha}\OperatorTok{/}\DecValTok{2}\NormalTok{,df)) }
+\NormalTok{t_dist =}\StringTok{ }\KeywordTok{rt}\NormalTok{(}\DecValTok{10000}\NormalTok{,df)}
+
+\NormalTok{t_stat =}\StringTok{ }\KeywordTok{abs}\NormalTok{(modelA}\OperatorTok{$}\NormalTok{coefficients[}\StringTok{'Age'}\NormalTok{]}\OperatorTok{/}\KeywordTok{summary}\NormalTok{(modelA)}\OperatorTok{$}\NormalTok{coefficients[}\StringTok{'Age'}\NormalTok{,}\StringTok{'Std. Error'}\NormalTok{])}
+
+\CommentTok{#equivalently,}
+\NormalTok{t_stat =}\StringTok{ }\KeywordTok{summary}\NormalTok{(modelA)}\OperatorTok{$}\NormalTok{coefficients[}\StringTok{'Age'}\NormalTok{,}\StringTok{'t value'}\NormalTok{]}
+
+\CommentTok{#calculate p-value from t-statistic}
+\NormalTok{p1_age =}\StringTok{ }\DecValTok{2}\OperatorTok{*}\KeywordTok{pt}\NormalTok{(}\OperatorTok{-}\KeywordTok{abs}\NormalTok{(t_stat),df)}
+
+\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ t_dist)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x),}\DataTypeTok{fill =} \StringTok{'aliceblue'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \KeywordTok{mean}\NormalTok{(t_dist) }\OperatorTok{+}\StringTok{ }\NormalTok{critical_values,}\DataTypeTok{color =} \StringTok{'red'}\NormalTok{) }\OperatorTok{+}\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =}\NormalTok{ t_stat,}\DataTypeTok{color =} \StringTok{'blue'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{subtitle =} \KeywordTok{bquote}\NormalTok{(}\KeywordTok{list}\NormalTok{(alpha }\OperatorTok{==}\NormalTok{.(alpha),df }\OperatorTok{==}\NormalTok{.(df))),}\DataTypeTok{title =} \StringTok{'T-distribution'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-4-1.pdf} For a
+given significance level \(\alpha\), the null-hypothesis is rejected if
+the p-value is less than \(\alpha\). The p-value is
+
+\begin{verbatim}
+## [1] "P-value from summary of the fitted model:"
+## [1] 7.09641e-12
+## [1] "P-value computed from the t-statistic:"
+## [1] 7.09641e-12
+\end{verbatim}
+
+Thus, the null-hypothesis is rejected for \(\alpha \ge 7\cdot10^{-12}\)
+Observe in the above figure a student-t distribution with 649 degrees of
+freedom, corresponding to the problem description. The critical values
+for a significance level \(\alpha = 0.05\) is marked with red, vertical
+lines, whereas the t-statistic assuming the null-hypothesis is maarked
+with a blue line. The t-statistic is clearly within the rejection
+region, and the null-hypothesis is rejected.
+
+\textbf{Q7:} The \((1-\alpha)\%\) confidence interval (CI) for
+\(\beta_{\text{Age}}\) for a given significance level \(\alpha\) is
+given by
+
+\[
+[\hat{\beta}-t_{\frac{\alpha}{2},n-p-1}\hat{SD}(\hat{\beta}),\hat{\beta}+t_{\frac{\alpha}{2},n-p-1}\hat{SD}(\hat{\beta})]
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#99% confidence interval for beta_Age}
+\NormalTok{betahat =}\StringTok{ }\KeywordTok{summary}\NormalTok{(modelA)}\OperatorTok{$}\NormalTok{coefficients[}\StringTok{'Age'}\NormalTok{,}\StringTok{'Estimate'}\NormalTok{]}
+\NormalTok{sd =}\StringTok{ }\KeywordTok{summary}\NormalTok{(modelA)}\OperatorTok{$}\NormalTok{coefficients[}\StringTok{'Age'}\NormalTok{,}\StringTok{'Std. Error'}\NormalTok{]}
+\NormalTok{ta2 =}\StringTok{ }\KeywordTok{qt}\NormalTok{(alpha}\OperatorTok{/}\DecValTok{2}\NormalTok{, df)}
+\NormalTok{UCI =}\StringTok{ }\NormalTok{betahat }\OperatorTok{+}\StringTok{ }\NormalTok{ta2}\OperatorTok{*}\NormalTok{sd}
+\NormalTok{LCI =}\StringTok{ }\NormalTok{betahat }\OperatorTok{-}\StringTok{ }\NormalTok{ta2}\OperatorTok{*}\NormalTok{sd}
+\NormalTok{CI =}\StringTok{ }\KeywordTok{c}\NormalTok{(UCI,LCI)}
+\CommentTok{#or, equivalently}
+\KeywordTok{print}\NormalTok{(}\StringTok{"built-in CI:"}\NormalTok{)}
+\KeywordTok{confint}\NormalTok{(modelA,}\StringTok{'Age'}\NormalTok{,}\DataTypeTok{level =} \FloatTok{0.99}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(}\StringTok{" "}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(}\StringTok{"Numerically from formula:"}\NormalTok{)}
+\NormalTok{CI}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "built-in CI:"
+##          0.5 %     99.5 %
+## Age 0.01473674 0.03203769
+## [1] " "
+## [1] "Numerically from formula:"
+## [1] 0.01681211 0.02996232
+\end{verbatim}
+
+Since the \(99\%\) CI for \(\beta_{\text{Age}}\) does not include \(0\),
+the p-value is less than \(\alpha = 0.01\).
+
+\textbf{Q8:} Prediction of a 16 year old male that is 170cm and
+non-smoking
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{Age=}\DecValTok{16}\NormalTok{, }\DataTypeTok{Htcm=}\DecValTok{170}\NormalTok{, }\DataTypeTok{Gender=}\StringTok{"M"}\NormalTok{, }\DataTypeTok{Smoke=}\DecValTok{0}\NormalTok{)}
+\NormalTok{pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(modelA,}\DataTypeTok{newdata =}\NormalTok{ new, }\DataTypeTok{type =} \StringTok{'response'}\NormalTok{)}
+\CommentTok{# Construct 95% prediction interval for FEV, note that modelA's response is log(FEV)}
+\NormalTok{pred}
+\NormalTok{f.exp =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{exp}\NormalTok{(x))}
+\NormalTok{\}}
+
+\NormalTok{fev.pred =}\StringTok{ }\KeywordTok{f.exp}\NormalTok{(pred)}
+
+\NormalTok{fev.predint =}\StringTok{ }\KeywordTok{predict}\NormalTok{(modelA,}\DataTypeTok{newdata =}\NormalTok{ new, }\DataTypeTok{level =} \FloatTok{0.95}\NormalTok{, }\DataTypeTok{interval =} \StringTok{'prediction'}\NormalTok{)}
+\KeywordTok{f.exp}\NormalTok{(fev.predint)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        1 
+## 1.323802 
+##       fit      lwr      upr
+## 1 3.75768 2.818373 5.010038
+\end{verbatim}
+
+Best prediction for \(\log(\text{FEV})\) is 1.324. The \(95\%\)
+prediction interval for the forced expiratory volume, FEV, of the new
+observation is \([2.812, 5.010]\). The prediction interval is too wide
+to be useful. A person with the given characteristic will on average
+have a \(95\%\) chance of having a FEV between 2.8 and 5.0
+
+\section{Problem 2: Classification}\label{problem-2-classification}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(class)}\CommentTok{# for function knn}
+\KeywordTok{library}\NormalTok{(caret)}\CommentTok{# for confusion matrices}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}\CommentTok{# for ggplot}
+\NormalTok{raw =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://www.math.ntnu.no/emner/TMA4268/2019v/data/tennis.csv"}\NormalTok{)}
+\NormalTok{M =}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{y=}\KeywordTok{as.factor}\NormalTok{(raw}\OperatorTok{$}\NormalTok{Result),}
+                       \DataTypeTok{x1=}\NormalTok{raw}\OperatorTok{$}\NormalTok{ACE.}\DecValTok{1}\OperatorTok{-}\NormalTok{raw}\OperatorTok{$}\NormalTok{UFE.}\DecValTok{1}\OperatorTok{-}\NormalTok{raw}\OperatorTok{$}\NormalTok{DBF.}\DecValTok{1}\NormalTok{, }
+                       \DataTypeTok{x2=}\NormalTok{raw}\OperatorTok{$}\NormalTok{ACE.}\DecValTok{2}\OperatorTok{-}\NormalTok{raw}\OperatorTok{$}\NormalTok{UFE.}\DecValTok{2}\OperatorTok{-}\NormalTok{raw}\OperatorTok{$}\NormalTok{DBF.}\DecValTok{2}\NormalTok{))}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4268}\NormalTok{) }\CommentTok{# for reproducibility}
+\NormalTok{tr =}\StringTok{ }\KeywordTok{sample.int}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(M),}\KeywordTok{nrow}\NormalTok{(M)}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{trte=}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\KeywordTok{nrow}\NormalTok{(M))}
+\NormalTok{trte[tr]=}\DecValTok{0}
+\NormalTok{Mdf=}\KeywordTok{data.frame}\NormalTok{(M,}\StringTok{"istest"}\NormalTok{=}\KeywordTok{as.factor}\NormalTok{(trte))}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\NormalTok{Mdf,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x1,}\DataTypeTok{y=}\NormalTok{x2,}\DataTypeTok{colour=}\NormalTok{y,}\DataTypeTok{group=}\NormalTok{istest,}\DataTypeTok{shape=}\NormalTok{istest))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}\OperatorTok{+}\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\textbf{Q9:} The mathematical formula for the K-nearest neighbour
+esitimator \(\hat{y} \in \{0,1\}\) is given by \[
+\hat{P}(Y = j | X = x_0) = \frac{1}{K}\sum_{i\in N_0}I(y_i = j)
+\] where K is the flexibility parameter determining how many points are
+in the neighbouring set \(N_0\). The classifier identifies the K nearest
+points to a test observation \(x_0\) in the training data, and
+calculates the conditional, or posterior, probability of being in class
+\(j\) as the fraction of points in \(N_0\) where the response is \(j\).
+\(I(y_i = j)\) is a binomial function yielding 1 if \(y_i = j\), and 0
+elsewhere.
+
+\textbf{Q10:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Misclassification error for training and test data using Knn with k = 1:30}
+\NormalTok{knn.train =}\StringTok{ }\NormalTok{Mdf[tr,]}
+\NormalTok{knn.test =}\StringTok{ }\NormalTok{Mdf[}\OperatorTok{-}\NormalTok{tr,]}
+
+\NormalTok{K =}\StringTok{ }\DecValTok{30}
+\NormalTok{train.error =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,K)}
+\NormalTok{test.error =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,K)}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{K)\{}
+\NormalTok{  test.pred =}\StringTok{ }\NormalTok{class}\OperatorTok{::}\KeywordTok{knn}\NormalTok{(}\DataTypeTok{train =}\NormalTok{ knn.train,}\DataTypeTok{test =}\NormalTok{ knn.test,}\DataTypeTok{cl =}\NormalTok{ knn.train}\OperatorTok{$}\NormalTok{y,}\DataTypeTok{k =}\NormalTok{ k)}
+\NormalTok{  train.pred =}\StringTok{ }\NormalTok{class}\OperatorTok{::}\KeywordTok{knn}\NormalTok{(}\DataTypeTok{train =}\NormalTok{ knn.train, }\DataTypeTok{test =}\NormalTok{ knn.train, }\DataTypeTok{cl =}\NormalTok{ knn.train}\OperatorTok{$}\NormalTok{y, }\DataTypeTok{k =}\NormalTok{k)}
+\NormalTok{  test.error[k] =}\StringTok{ }\KeywordTok{mean}\NormalTok{(test.pred }\OperatorTok{!=}\StringTok{ }\NormalTok{knn.test}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{  train.error[k] =}\StringTok{ }\KeywordTok{mean}\NormalTok{(train.pred }\OperatorTok{!=}\StringTok{ }\NormalTok{knn.train}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{\}}
+\NormalTok{train.e =}\StringTok{ }\NormalTok{train.error}
+\NormalTok{test.e =}\StringTok{ }\NormalTok{test.error}
+
+\NormalTok{train.error.df =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{k=}\DecValTok{1}\OperatorTok{:}\NormalTok{K, }\DataTypeTok{error =}\NormalTok{ train.error)}
+\KeywordTok{ggplot}\NormalTok{(train.error.df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{k, }\DataTypeTok{y=}\NormalTok{error))}\OperatorTok{+}\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}\OperatorTok{+}\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{linetype=}\StringTok{"dotted"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{'Misclassification rates KNN - Training data'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test.error.df =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{k=}\DecValTok{1}\OperatorTok{:}\NormalTok{K, }\DataTypeTok{error =}\NormalTok{ test.error)}
+\KeywordTok{ggplot}\NormalTok{(test.error.df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{k, }\DataTypeTok{y=}\NormalTok{error))}\OperatorTok{+}\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}\OperatorTok{+}\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{linetype=}\StringTok{"dotted"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{'Misclassification rates KNN - Test data'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{ks =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{30} \CommentTok{# Choose K from 1 to 30.}
+\NormalTok{idx =}\StringTok{ }\KeywordTok{createFolds}\NormalTok{(M[tr,}\DecValTok{1}\NormalTok{], }\DataTypeTok{k=}\DecValTok{5}\NormalTok{) }\CommentTok{# Divide the training data into 5 folds.}
+\CommentTok{# "Sapply" is a more efficient for-loop. }
+\CommentTok{# We loop over each fold and each value in "ks"}
+\CommentTok{# and compute error rates for each combination.}
+\CommentTok{# All the error rates are stored in the matrix "cv", }
+\CommentTok{# where folds are rows and values of $K$ are columns.}
+\NormalTok{cv =}\StringTok{ }\KeywordTok{sapply}\NormalTok{(ks, }\ControlFlowTok{function}\NormalTok{(k)\{ }
+  \KeywordTok{sapply}\NormalTok{(}\KeywordTok{seq_along}\NormalTok{(idx), }\ControlFlowTok{function}\NormalTok{(j) \{}
+\NormalTok{    yhat =}\StringTok{ }\NormalTok{class}\OperatorTok{::}\KeywordTok{knn}\NormalTok{(}\DataTypeTok{train=}\NormalTok{M[tr[ }\OperatorTok{-}\NormalTok{idx[[j]] ], }\OperatorTok{-}\DecValTok{1}\NormalTok{],}
+               \DataTypeTok{cl=}\NormalTok{M[tr[ }\OperatorTok{-}\NormalTok{idx[[j]] ], }\DecValTok{1}\NormalTok{],}
+               \DataTypeTok{test=}\NormalTok{M[tr[ idx[[j]] ], }\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{k =}\NormalTok{ k)}
+    \KeywordTok{mean}\NormalTok{(M[tr[ idx[[j]] ], }\DecValTok{1}\NormalTok{] }\OperatorTok{!=}\StringTok{ }\NormalTok{yhat)}
+\NormalTok{  \})}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Q11:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cv.e =}\StringTok{ }\KeywordTok{colMeans}\NormalTok{(cv)}
+\NormalTok{cv.se =}\StringTok{ }\KeywordTok{apply}\NormalTok{(cv,}\DecValTok{2}\NormalTok{,sd)}
+\NormalTok{k.min =}\StringTok{ }\KeywordTok{which.min}\NormalTok{(cv.e)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Q12:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(colorspace)}
+\NormalTok{co =}\StringTok{ }\KeywordTok{rainbow_hcl}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}\OperatorTok{+}\NormalTok{.}\DecValTok{1}\NormalTok{, }\DataTypeTok{mgp =} \KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(ks, cv.e, }\DataTypeTok{type=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.7}\NormalTok{), }\DataTypeTok{col =}\NormalTok{ co[}\DecValTok{2}\NormalTok{],}
+     \DataTypeTok{xlab =} \StringTok{"Number of neighbors"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Misclassification error"}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(ks, cv.e}\OperatorTok{-}\NormalTok{cv.se, ks, cv.e}\OperatorTok{+}\NormalTok{cv.se, }\DataTypeTok{angle=}\DecValTok{90}\NormalTok{, }\DataTypeTok{length=}\NormalTok{.}\DecValTok{03}\NormalTok{, }\DataTypeTok{code=}\DecValTok{3}\NormalTok{, }\DataTypeTok{col=}\NormalTok{co[}\DecValTok{2}\NormalTok{])}
+\KeywordTok{lines}\NormalTok{(ks, train.e, }\DataTypeTok{type=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.7}\NormalTok{), }\DataTypeTok{col =}\NormalTok{ co[}\DecValTok{3}\NormalTok{])}
+\KeywordTok{lines}\NormalTok{(ks, test.e, }\DataTypeTok{type=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.7}\NormalTok{), }\DataTypeTok{col =}\NormalTok{ co[}\DecValTok{1}\NormalTok{])}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\DataTypeTok{legend =} \KeywordTok{c}\NormalTok{(}\StringTok{"Test"}\NormalTok{, }\StringTok{"5-fold CV"}\NormalTok{, }\StringTok{"Training"}\NormalTok{), }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\NormalTok{co)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-12-1.pdf} In
+K-nearest neighbour, the degree of flexibility decrease with K. That is,
+the lower the K, the lower the bias. Therefore, the bias increase with
+K. According to the bias-variance tradeoff, the variance will decrease
+with K.
+
+\textbf{Q13:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k =}\StringTok{ }\KeywordTok{tail}\NormalTok{(}\KeywordTok{which}\NormalTok{(cv.e }\OperatorTok{<}\StringTok{ }\NormalTok{cv.e[k.min] }\OperatorTok{+}\StringTok{ }\NormalTok{cv.se[k.min]), }\DecValTok{1}\NormalTok{)}
+\NormalTok{size =}\StringTok{ }\DecValTok{100}
+\NormalTok{xnew =}\StringTok{ }\KeywordTok{apply}\NormalTok{(M[tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(X) }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(X), }\KeywordTok{max}\NormalTok{(X), }\DataTypeTok{length.out=}\NormalTok{size))}
+\NormalTok{grid =}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(xnew[,}\DecValTok{1}\NormalTok{], xnew[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{grid.yhat =}\StringTok{ }\KeywordTok{knn}\NormalTok{(M[tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], M[tr,}\DecValTok{1}\NormalTok{], }\DataTypeTok{k=}\NormalTok{k, }\DataTypeTok{test=}\NormalTok{grid)}
+\NormalTok{np =}\StringTok{ }\DecValTok{300}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{mgp =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{contour}\NormalTok{(xnew[,}\DecValTok{1}\NormalTok{], xnew[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{z =} \KeywordTok{matrix}\NormalTok{(grid.yhat, size), }\DataTypeTok{levels=}\NormalTok{.}\DecValTok{5}\NormalTok{, }
+        \DataTypeTok{xlab=}\KeywordTok{expression}\NormalTok{(}\StringTok{"x"}\NormalTok{[}\DecValTok{1}\NormalTok{]), }\DataTypeTok{ylab=}\KeywordTok{expression}\NormalTok{(}\StringTok{"x"}\NormalTok{[}\DecValTok{2}\NormalTok{]), }\DataTypeTok{axes=}\OtherTok{FALSE}\NormalTok{,}
+        \DataTypeTok{main =} \KeywordTok{paste0}\NormalTok{(k,}\StringTok{"-nearest neighbors"}\NormalTok{), }\DataTypeTok{cex=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{labels=}\StringTok{""}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(grid, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\NormalTok{grid.yhat)}
+\KeywordTok{points}\NormalTok{(M[}\DecValTok{1}\OperatorTok{:}\NormalTok{np,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{col=}\KeywordTok{factor}\NormalTok{(M[}\DecValTok{1}\OperatorTok{:}\NormalTok{np,}\DecValTok{1}\NormalTok{]), }\DataTypeTok{pch =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \FloatTok{1.5}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"Player 1 wins"}\NormalTok{, }\StringTok{"Player 2 wins"}\NormalTok{), }
+       \DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"black"}\NormalTok{), }\DataTypeTok{pch=}\DecValTok{1}\NormalTok{)}
+\KeywordTok{box}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-13-1.pdf} The
+strategy for finding K in the above code chunk is finding the greatest K
+in which the average K over all folds is less than the minimum K + its
+standard deviation.
+
+\textbf{Q14:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{K=}\StringTok{ }\DecValTok{30}
+\KeywordTok{library}\NormalTok{(pROC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Type 'citation("pROC")' for a citation.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'pROC'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:colorspace':
+## 
+##     coords
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     cov, smooth, var
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# knn with prob=TRUE outputs the probability of the winning class}
+\CommentTok{# therefore we have to do an extra step to get the probability of player 1 winning}
+\NormalTok{auc =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,K)}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{K)\{}
+\NormalTok{  KNNclass=class}\OperatorTok{::}\KeywordTok{knn}\NormalTok{(}\DataTypeTok{train=}\NormalTok{M[tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{cl=}\NormalTok{M[tr,}\DecValTok{1}\NormalTok{], }\DataTypeTok{test=}\NormalTok{M[}\OperatorTok{-}\NormalTok{tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{k =}\NormalTok{ k,}\DataTypeTok{prob=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{  KNNprobwinning=}\KeywordTok{attributes}\NormalTok{(KNNclass)}\OperatorTok{$}\NormalTok{prob}
+\NormalTok{  KNNprob=}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(KNNclass }\OperatorTok{==}\StringTok{ "0"}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{KNNprobwinning, KNNprobwinning)}
+\CommentTok{# now KNNprob has probability that player 1 wins, for all matches in the test set}
+
+\NormalTok{  KNN.roc =}\StringTok{ }\KeywordTok{roc}\NormalTok{(}\DataTypeTok{response =}\NormalTok{M[}\OperatorTok{-}\NormalTok{tr,}\DecValTok{1}\NormalTok{],}\DataTypeTok{predictor =}\NormalTok{ KNNprob)}
+\NormalTok{  auc[k] =}\StringTok{ }\KeywordTok{auc}\NormalTok{(KNN.roc)}
+\NormalTok{\}}
+\KeywordTok{print}\NormalTok{(}\StringTok{"Maximum Area under the curve"}\NormalTok{)}
+\KeywordTok{max}\NormalTok{(auc)}
+\KeywordTok{print}\NormalTok{(}\StringTok{'Occuring at K = '}\NormalTok{)}
+\KeywordTok{which}\NormalTok{(auc }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(auc))}
+
+\NormalTok{KNNclass=class}\OperatorTok{::}\KeywordTok{knn}\NormalTok{(}\DataTypeTok{train=}\NormalTok{M[tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{cl=}\NormalTok{M[tr,}\DecValTok{1}\NormalTok{], }\DataTypeTok{test=}\NormalTok{M[}\OperatorTok{-}\NormalTok{tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{k =}\NormalTok{ K,}\DataTypeTok{prob=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{KNNprobwinning=}\KeywordTok{attributes}\NormalTok{(KNNclass)}\OperatorTok{$}\NormalTok{prob}
+\NormalTok{KNNprob=}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(KNNclass }\OperatorTok{==}\StringTok{ "0"}\NormalTok{, }\DecValTok{1}\OperatorTok{-}\NormalTok{KNNprobwinning, KNNprobwinning)}
+\CommentTok{# now KNNprob has probability that player 1 wins, for all matches in the test set}
+\NormalTok{KNN.roc =}\StringTok{ }\KeywordTok{roc}\NormalTok{(}\DataTypeTok{response =}\NormalTok{M[}\OperatorTok{-}\NormalTok{tr,}\DecValTok{1}\NormalTok{],}\DataTypeTok{predictor =}\NormalTok{ KNNprob)}
+\KeywordTok{plot}\NormalTok{(KNN.roc)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"K = 30"}\NormalTok{)}
+\KeywordTok{auc}\NormalTok{(KNN.roc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Maximum Area under the curve"
+## [1] 0.8200387
+## [1] "Occuring at K = "
+## [1] 17
+## [1] "K = 30"
+## Area under the curve: 0.8178
+\end{verbatim}
+
+The ROC-curve is found by calculating the sensitivity and specificity of
+the model, where all possible values of the decicion thresholds are
+being considered. The AUC is the area under the ROC-curve, and a good
+classifier has a high value of AUC \(\in[0,1]\). The AUC for K = 30, our
+choice from the previous question, is \(0.8178\).
+
+We also found that K = 17 yields the optimal, or largest value for the
+AUC.
+
+The interpretation of the AUC is the proportion of time the model ranks
+a random positive observation (true positive) higher than a random
+negative (false positive) observation.
+
+Random guessing would rank a random positive observation higher than a
+negative observation 50\% of the time, and thus the AUC of random
+guessing is 0.50.
+
+\textbf{Q15:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# new classifier y_hat(x) = argmax_k(x_k)}
+
+\NormalTok{new_classifier =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(M[}\OperatorTok{-}\NormalTok{tr,}\DecValTok{2}\NormalTok{] }\OperatorTok{>}\StringTok{ }\NormalTok{M[}\OperatorTok{-}\NormalTok{tr,}\DecValTok{3}\NormalTok{],}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{argmax =}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(new_classifier)}
+
+\NormalTok{conf_knn =}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(test.pred,Mdf[}\OperatorTok{-}\NormalTok{tr,}\DecValTok{1}\NormalTok{])}
+\NormalTok{conf_knn}\OperatorTok{$}\NormalTok{table}
+
+\NormalTok{conf_argmax =}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(argmax,Mdf[}\OperatorTok{-}\NormalTok{tr,}\DecValTok{1}\NormalTok{])}
+\NormalTok{conf_argmax}\OperatorTok{$}\NormalTok{table}
+
+
+\NormalTok{k =}\StringTok{ }\KeywordTok{tail}\NormalTok{(}\KeywordTok{which}\NormalTok{(cv.e }\OperatorTok{<}\StringTok{ }\NormalTok{cv.e[k.min] }\OperatorTok{+}\StringTok{ }\NormalTok{cv.se[k.min]), }\DecValTok{1}\NormalTok{)}
+\NormalTok{size =}\StringTok{ }\DecValTok{100}
+\NormalTok{xnew =}\StringTok{ }\KeywordTok{apply}\NormalTok{(M[tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(X) }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(X), }\KeywordTok{max}\NormalTok{(X), }\DataTypeTok{length.out=}\NormalTok{size))}
+\NormalTok{grid =}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(xnew[,}\DecValTok{1}\NormalTok{], xnew[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{grid.yhat =}\StringTok{ }\KeywordTok{knn}\NormalTok{(M[tr,}\OperatorTok{-}\DecValTok{1}\NormalTok{], M[tr,}\DecValTok{1}\NormalTok{], }\DataTypeTok{k=}\NormalTok{k, }\DataTypeTok{test=}\NormalTok{grid)}
+\NormalTok{np =}\StringTok{ }\DecValTok{300}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{mgp =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{contour}\NormalTok{(xnew[,}\DecValTok{1}\NormalTok{], xnew[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{z =} \KeywordTok{matrix}\NormalTok{(grid.yhat, size), }\DataTypeTok{levels=}\NormalTok{.}\DecValTok{5}\NormalTok{, }
+        \DataTypeTok{xlab=}\KeywordTok{expression}\NormalTok{(}\StringTok{"x"}\NormalTok{[}\DecValTok{1}\NormalTok{]), }\DataTypeTok{ylab=}\KeywordTok{expression}\NormalTok{(}\StringTok{"x"}\NormalTok{[}\DecValTok{2}\NormalTok{]), }\DataTypeTok{axes=}\OtherTok{FALSE}\NormalTok{,}
+        \DataTypeTok{main =} \KeywordTok{paste0}\NormalTok{(k,}\StringTok{"-nearest neighbors"}\NormalTok{), }\DataTypeTok{cex=}\FloatTok{1.2}\NormalTok{, }\DataTypeTok{labels=}\StringTok{""}\NormalTok{,}\DataTypeTok{col =} \StringTok{'black'}\NormalTok{,}\DataTypeTok{lwd =} \DecValTok{3}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(grid, }\DataTypeTok{pch=}\StringTok{"."}\NormalTok{, }\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\NormalTok{grid.yhat)}
+\KeywordTok{points}\NormalTok{(M[}\DecValTok{1}\OperatorTok{:}\NormalTok{np,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{col=}\KeywordTok{factor}\NormalTok{(M[}\DecValTok{1}\OperatorTok{:}\NormalTok{np,}\DecValTok{1}\NormalTok{]), }\DataTypeTok{pch =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lwd =} \FloatTok{1.5}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{,}\DataTypeTok{pch=}\StringTok{'-'}\NormalTok{,}\DataTypeTok{lwd =} \DecValTok{3}\NormalTok{)}
+
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\StringTok{"Player 1 wins"}\NormalTok{, }\StringTok{"Player 2 wins"}\NormalTok{,}\StringTok{'argmax class boundary'}\NormalTok{,}\StringTok{'knn class boundary'}\NormalTok{), }
+       \DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"black"}\NormalTok{,}\StringTok{'blue'}\NormalTok{,}\StringTok{'black'}\NormalTok{), }\DataTypeTok{pch=}\KeywordTok{c}\NormalTok{(}\StringTok{'o'}\NormalTok{,}\StringTok{'o'}\NormalTok{,}\StringTok{'-'}\NormalTok{,}\StringTok{'-'}\NormalTok{))}
+\KeywordTok{box}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{comp1_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table1 =}\StringTok{ }\NormalTok{conf_knn}\OperatorTok{$}\NormalTok{table}
+\NormalTok{table2 =}\StringTok{ }\NormalTok{conf_argmax}\OperatorTok{$}\NormalTok{table}
+\NormalTok{knn.misclasserror =}\StringTok{ }\NormalTok{(table1[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{table1[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(table1)}
+\NormalTok{knn.misclasserror}
+\NormalTok{argmax.misclasserror =}\StringTok{ }\NormalTok{(table2[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{table2[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(table2)}
+\NormalTok{argmax.misclasserror }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Reference
+## Prediction   0   1
+##          0 142  43
+##          1  52 157
+##           Reference
+## Prediction   0   1
+##          0 149  47
+##          1  45 153
+## [1] 0.2411168
+## [1] 0.2335025
+\end{verbatim}
+
+We see that the argmax classifier yields a lower misclassification error
+on the test set, i.e the argmax classifier is preferrable.
+
+\section{Problem 3: Bias-variance
+trade-off}\label{problem-3-bias-variance-trade-off}
+
+\textbf{Q16:}
+
+\[
+\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{Y}
+\] Expected value \$\$ E{[}\boldsymbol{\hat{\beta}}{]} =
+E{[}(X\textsuperscript{TX)}\{-1\})X\^{}T\mathbf{Y}{]} =
+(X\textsuperscript{TX)}\{-1\}X\^{}TE{[}\mathbf{Y}{]} =
+(X\textsuperscript{TX)}\{-1\}X\^{}TE{[}X\textbackslash{}mathbf\{\beta +
+\boldsymbol{\epsilon}{]}
+
+\$\$ \textbf{Q17:}
+
+\textbf{Q18:}
+\[\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)\]
+
+Ridge estimator: \[
+\widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y}
+\]
+
+\textbf{Q19:} spørsmål 19 er bra \textbf{Q20:}
+
+\textbf{Q21:}
+\[\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2]=[\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{values=}\KeywordTok{dget}\NormalTok{(}\StringTok{"https://www.math.ntnu.no/emner/TMA4268/2019v/data/BVtradeoffvalues.dd"}\NormalTok{)}
+\NormalTok{X=values}\OperatorTok{$}\NormalTok{X}
+\KeywordTok{dim}\NormalTok{(X)}
+\NormalTok{x0=values}\OperatorTok{$}\NormalTok{x0}
+\KeywordTok{dim}\NormalTok{(x0)}
+\NormalTok{beta=values}\OperatorTok{$}\NormalTok{beta}
+\KeywordTok{dim}\NormalTok{(beta)}
+\NormalTok{sigma=values}\OperatorTok{$}\NormalTok{sigma}
+\NormalTok{sigma}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 100  81
+## [1] 81  1
+## [1] 81  1
+## [1] 0.5
+\end{verbatim}
+
+Hint: we perform matrix multiplication using \texttt{\%*\%}, transpose
+of a matrix \texttt{A} with \texttt{t(A)} and inverse with
+\texttt{solve(A)}.
+
+\textbf{Q22:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sqbias=}\ControlFlowTok{function}\NormalTok{(lambda,X,x0,beta)}
+\NormalTok{\{}
+\NormalTok{  p=}\KeywordTok{dim}\NormalTok{(X)[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  value=}\StringTok{ }\CommentTok{#HERE YOU FILL IN}
+\StringTok{  }\KeywordTok{return}\NormalTok{(value)}
+\NormalTok{\}}
+\NormalTok{thislambda=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DataTypeTok{length=}\DecValTok{500}\NormalTok{)}
+\NormalTok{sqbiaslambda=}\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,}\KeywordTok{length}\NormalTok{(thislambda))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(thislambda)) sqbiaslambda[i]=}\KeywordTok{sqbias}\NormalTok{(thislambda[i],X,x0,beta)}
+\KeywordTok{plot}\NormalTok{(thislambda,sqbiaslambda,}\DataTypeTok{col=}\DecValTok{2}\NormalTok{,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Q23:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance=}\ControlFlowTok{function}\NormalTok{(lambda,X,x0,sigma)}
+\NormalTok{\{}
+\NormalTok{  p=}\KeywordTok{dim}\NormalTok{(X)[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  inv=}\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(X)}\OperatorTok{%*%}\NormalTok{X}\OperatorTok{+}\NormalTok{lambda}\OperatorTok{*}\KeywordTok{diag}\NormalTok{(p))}
+\NormalTok{  value=}\CommentTok{#HERE YOU FILL IN}
+\StringTok{  }\KeywordTok{return}\NormalTok{(value)}
+\NormalTok{\}}
+\NormalTok{thislambda=}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DataTypeTok{length=}\DecValTok{500}\NormalTok{)}
+\NormalTok{variancelambda=}\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,}\KeywordTok{length}\NormalTok{(thislambda))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(thislambda)) variancelambda[i]=}\KeywordTok{variance}\NormalTok{(thislambda[i],X,x0,sigma)}
+\KeywordTok{plot}\NormalTok{(thislambda,variancelambda,}\DataTypeTok{col=}\DecValTok{4}\NormalTok{,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Q24:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tot=sqbiaslambda}\OperatorTok{+}\NormalTok{variancelambda}\OperatorTok{+}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}
+\KeywordTok{which.min}\NormalTok{(tot)}
+\NormalTok{thislambda[}\KeywordTok{which.min}\NormalTok{(tot)]}
+\KeywordTok{plot}\NormalTok{(thislambda,tot,}\DataTypeTok{col=}\DecValTok{1}\NormalTok{,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{max}\NormalTok{(tot)))}
+\KeywordTok{lines}\NormalTok{(thislambda, sqbiaslambda,}\DataTypeTok{col=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(thislambda, variancelambda,}\DataTypeTok{col=}\DecValTok{4}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(thislambda,}\KeywordTok{rep}\NormalTok{(sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{,}\DecValTok{500}\NormalTok{),}\DataTypeTok{col=}\StringTok{"orange"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{thislambda[}\KeywordTok{which.min}\NormalTok{(tot)],}\DataTypeTok{col=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
