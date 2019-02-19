@@ -31,7 +31,7 @@ $$ \log(\text{FEV}) = \beta_0 + \beta_1AGE + \beta_2HTCM +\beta_3GENDERM  +
 \beta_4SMOKE + \varepsilon$$
 
 Fitted Model:
-$$ \hat{log(\text{FEV})} = -1.944 + 0.023AGE + 0.017HTCM + 0.029GENDERM -0.046SMOKE$$
+$$ \hat{\log(\text{FEV})} = -1.944 + 0.023AGE + 0.017HTCM + 0.029GENDERM -0.046SMOKE$$
 **Q2:** 
     
 * `Estimate` - in particular interpretation of `Intercept`
@@ -417,7 +417,7 @@ We see that the argmax classifier yields a lower misclassification error on the 
 
 Here you see how to write formulas with latex (needed below)
 $$
-\hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Y axel var her}
+\hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Y}
 $$
 
 **Q16:** 
