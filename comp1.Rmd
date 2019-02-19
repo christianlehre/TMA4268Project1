@@ -452,11 +452,25 @@ $$
 \end{split}
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
+<<<<<<< HEAD
 
 **Q17:** 
+=======
+**Q17:**
+$$
+  \begin{split}
+    E[\hat{f}(\boldsymbol{x_0})] &= E[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
+    &\\
+    &= x_0^T E[\boldsymbol{\boldsymbol{\hat{\beta}}}] \\
+    &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
+  \end{split}
+$$
+>>>>>>> fb189dd0e3194fa3c9e7cfb4641544371b0e2666
 
 **Q18:** 
-$$\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)$$
+$$
+\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)
+$$
 
 
 Ridge estimator:
