@@ -461,10 +461,27 @@ $$
     &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
   \end{split}
 $$
+$$
+  \begin{split}
+    \text{Var}[\hat{f}(\boldsymbol{x_0})] &= \text{Var}[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
+    &\\
+    &= x_0^T \text{Var}[\boldsymbol{\boldsymbol{\hat{\beta}}}]x_0 \\
+    &= x_0^T \sigma^2(X^TX)^{-1}x_0 \\
+    &= x_0^T(X^TX)^{-1}x_0 \sigma^2
+  \end{split}
+$$
+
 
 **Q18:** 
 $$
-\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)
+\begin{split}
+\text{E}[(Y_0-\hat{f}({\bf x}_0))^2] &= \text{E}[(Y_0)^2-2Y_0\hat{f}({\bf x}_0) + \hat{f}({\bf x}_0)^2] \\
+&= \text{E}[(Y_0)^2]-2E[Y_0\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)^2] \\
+&= \text{Var}[Y_0] + \text{E}[(Y_0)]^2-2E[Y_0]E[\hat{f}({\bf x}_0)] + \text{Var}[\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)]^2 \\
+&= \text{Var}[Y_0] + f(x_0)^2-2f(x_0)E[\hat{f}({\bf x}_0)] + \text{Var}[\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)]^2 \\
+&= \text{Var}(\varepsilon) + \text{Var}[\hat{f}({\bf x}_0)] + (\text{E}[\hat{f}({\bf x}_0)]-f({\bf x}_0))^2 \\
+&= \text{Var}(\varepsilon) + \text{Var}[\hat{f}({\bf x}_0)] + [\text{Bias}(\hat{f}({\bf x}_0))]^2
+\end{split}
 $$
 
 
