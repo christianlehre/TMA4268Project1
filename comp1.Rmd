@@ -446,9 +446,12 @@ $$
 &\\
 &= (X^TX)^{-1}X^T\sigma^2I\bigg((X^TX)^{-1}X^T\bigg)^T\\
 &\\
-&= (X^TX)^{-1}(X^TX)(X^TX)^{-1}\sigma^2\\
+&= (X^TX)^{-1}(X^TX)((X^TX)^{-1})^T\sigma^2\\
 &\\
-&= \sigma^2(X^TX)^{-1}
+&= \sigma^2((X^TX)^{-1})^T\\
+&\\
+&=\sigma^2(X^TX)^{-1}
+
 \end{split}
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
@@ -489,6 +492,16 @@ Hint: we perform matrix multiplication using `%*%`, transpose of a matrix `A` wi
 **Q22:** 
 
 ```{r,eval=FALSE}
+values=dget("https://www.math.ntnu.no/emner/TMA4268/2019v/data/BVtradeoffvalues.dd")
+X=values$X
+dim(X)
+x0=values$x0
+dim(x0)
+beta=values$beta
+dim(beta)
+sigma=values$sigma
+sigma
+
 sqbias=function(lambda,X,x0,beta)
 {
   p=dim(X)[2]
