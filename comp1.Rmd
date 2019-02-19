@@ -452,6 +452,10 @@ $$
 \end{split}
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
+<<<<<<< HEAD
+
+**Q17:** 
+=======
 **Q17:**
 $$
   \begin{split}
@@ -461,6 +465,7 @@ $$
     &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
   \end{split}
 $$
+<<<<<<< HEAD
 $$
   \begin{split}
     \text{Var}[\hat{f}(\boldsymbol{x_0})] &= \text{Var}[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
@@ -471,6 +476,9 @@ $$
   \end{split}
 $$
 
+=======
+>>>>>>> fb189dd0e3194fa3c9e7cfb4641544371b0e2666
+>>>>>>> 40c7466457dd12d97d0cfda0613eea0cd6921dea
 
 **Q18:** 
 $$
@@ -495,6 +503,7 @@ $$
 **Q20:** 
 
 **Q21:** 
+
 $$\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2]=[\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)$$
 
 
