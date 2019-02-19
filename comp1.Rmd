@@ -424,15 +424,39 @@ $$
 $$
 Expected value
 $$
-    E[\boldsymbol{\hat{\beta}}] = E[(X^TX)^{-1})X^T\mathbf{Y}]
-    = (X^TX)^{-1}X^TE[\mathbf{Y}]
-    = (X^TX)^{-1}X^TE[X\mathbf{\beta + \boldsymbol{\epsilon}]
-    
+  \begin{split}
+    E[\boldsymbol{\hat{\beta}}] &= E[(X^TX)^{-1})X^T\mathbf{Y}]\\
+    &\\
+    &= (X^TX)^{-1}X^TE[\mathbf{Y}]\\
+    &\\
+    &= (X^TX)^{-1}X^TE[X\boldsymbol{\beta} + \boldsymbol{\epsilon}]\\
+    &\\
+    &= (X^TX)^{-1}(X^TX)(E[\boldsymbol{\beta}] + E[\boldsymbol{\epsilon}])\\
+    &\\
+    &= \boldsymbol{\beta}
+  \end{split}
 $$
+Where we are assuming $\boldsymbol{\epsilon} \sim N(0,I\sigma^2)$.
+
+$$
+\begin{split}
+\text{Cov}[\boldsymbol{\hat{\beta}}] &= \text{Cov}[(X^TX)^{-1}X^T\mathbf{Y}]\\
+&\\
+&= (X^TX)^{-1}X^T\text{Cov}[\mathbf{Y}]\bigg((X^TX)^{-1}X^T\bigg)^T\\
+&\\
+&= (X^TX)^{-1}X^T\sigma^2I\bigg((X^TX)^{-1}X^T\bigg)^T\\
+&\\
+&= (X^TX)^{-1}(X^TX)(X^TX)^{-1}\sigma^2\\
+&\\
+&= \sigma^2(X^TX)^{-1}
+\end{split}
+$$
+where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
 **Q17:** 
 
 **Q18:** 
 $$\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)$$
+
 
 Ridge estimator:
 $$
