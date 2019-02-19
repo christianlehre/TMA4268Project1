@@ -410,7 +410,7 @@ argmax.misclasserror = (table2[1,2] + table2[2,1])/sum(table2)
 argmax.misclasserror 
 
 ```
-We see that the argmax classifier yields a lower misclassification error on the test set, i.e that is the classifier we will prefer in this contex.
+We see that the argmax classifier yields a lower misclassification error on the test set, i.e the argmax classifier is preferrable.
 
 
 # Problem 3: Bias-variance trade-off 
@@ -419,7 +419,6 @@ Here you see how to write formulas with latex (needed below)
 $$
 \hat{\boldsymbol \beta}=({\bf X}^T{\bf X})^{-1}{\bf X}^T{\bf Y axel var her}
 $$
-Test
 
 **Q16:** 
 
