@@ -16,7 +16,7 @@ knitr::opts_chunk$set(warning=FALSE)
 
 # Problem 1: Multiple linear regression 
 
-```{r,echo=TRUE,eval=TRUE}
+```{r,echo=FALSE,eval=TRUE}
 library(GLMsData)
 data("lungcap")
 lungcap$Htcm=lungcap$Ht*2.54
@@ -31,25 +31,25 @@ $$ \log(\text{FEV}) = \beta_0 + \beta_1AGE + \beta_2HTCM +\beta_3GENDERM  +
 \beta_4SMOKE + \varepsilon$$
 
 Fitted Model:
-$$ \hat{\log(\text{FEV})} = -1.944 + 0.023AGE + 0.017HTCM + 0.029GENDERM -0.046SMOKE$$
+$$ \log(\widehat{\text{FEV}}) = -1.944 + 0.023AGE + 0.017HTCM + 0.029GENDERM -0.046SMOKE$$
 
 **Q2:** 
     
 * `Estimate` - in particular interpretation of `Intercept`
 \newline 
 Estimated regression coefficients given by 
-$$\hat{\mathbf{\beta}} = (\mathbf{X^T}\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}$$.
-\newline When increasing covariate $x_j$ with one unit, and keeping all other covariates constant, the response variable changes with a factor of $\hat{\beta_j}$. Positive estimates reduce the value of the response, while negative estimates increase the value. The intercept is the value of the response when all covariates are zero.
+$$\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{Y}$$.
+\newline When increasing covariate $x_j$ with one unit, and keeping all other covariates constant, the response variable changes with a factor of $\hat{\beta_j}$. Positive estimates reduce the value of the response, while negative estimates increase the value. Example increasing AGE from 25 to 26 will increase $\log(\text{FEV})$ by $0.023$. Similarily, for the binary predictor SMOKE, the coefficient estimate represent the change in the response when changing from non-smoker (0) to smoker (1), and is equal to $-0.046$. The intercept is the value of the response when all covariates are set to zero. This is not necessarily realistic, as there is no humans with e.g zero height.
 
 * `Std.Error`
 \newline 
 Estimated standard deviation of the estimated regression coefficients, i.e the average amount that the estimated regression coefficients vary from the actual value. The Std.Error is given by 
-$$\hat{\text{SD}}(\hat{\beta_j}) = \sqrt(\hat{\sigma}^2(\mathbf{X}^T\mathbf{X})^{-1}_{jj})$$, where $\mathbf{X}$ is the design matrix of the regression, and $\hat{\sigma}$ is the estimated standard deviation of the response.
+$$\widehat{\text{SD}}(\hat{\beta_j}) = \sqrt{(\hat{\sigma}^2(X^TX})^{-1}_{jj})}$$, where $X$ is the design matrix of the regression, and $\hat{\sigma}$ is the residual standard error.
 
 * `Residual standard error`
 \newline
 Estimate of the standard deviation of the error term $\epsilon$ in the regression model. The residual standard error is given by
-$$\hat{\sigma} = \frac{RSS}{n-p-1} = \frac{\sum_{i = 1}^n(Y_i - \hat{Y_i})^2}{n-p-1}$$, where n is the number of observations and p is the number of covariates (or predictors) in the fitted model.
+$$\hat{\sigma} = \frac{RSS}{n-p-1} = \frac{\sum_{i = 1}^n(Y_i - \hat{Y_i})^2}{n-p-1}$$, where n is the number of observations and p is the number of covariates (or predictors) in the fitted model. In our case, $n = 654$ and $p = 4$
 * `F-statistic`
 \newline
 The F-statistic is used to test the hypothesis that all estimated regression coefficients are zero, i.e to check whether there is a relationship between response and predictors.
