@@ -1,10 +1,9 @@
 ---
 subtitle: "TMA4268 Statistical Learning V2019"
 title: "Compulsory exercise 1"
-author: "Christian Lehre, Axel R??nold & Erik B??e"
+author: "Christian Lehre, Axel Rønold & Erik Bøe"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: 
-  #html_document
+output:
   pdf_document
 ---
   
@@ -465,7 +464,11 @@ $$
 &\\
 &= \sigma^2((X^TX)^{-1})^T\\
 &\\
+<<<<<<< HEAD
 &=\sigma^2(X^TX)^{-1}
+=======
+&= \sigma^2(X^TX)^{-1}
+>>>>>>> e52cb009df1aa6fb8e23321975f6e8aa5436b166
 \end{aligned}
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
