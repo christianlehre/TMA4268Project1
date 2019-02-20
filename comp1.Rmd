@@ -38,31 +38,36 @@ $$ \log(\widehat{\text{FEV}}) = -1.944 + 0.023AGE + 0.017HTCM + 0.029GENDERM -0.
 * `Estimate` - in particular interpretation of `Intercept`
 \newline 
 Estimated regression coefficients given by 
-$$\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{Y}$$.
+$$
+\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{Y}
+$$.
 \newline When increasing covariate $x_j$ with one unit, and keeping all other covariates constant, the response variable changes with a factor of $\hat{\beta_j}$. Positive estimates reduce the value of the response, while negative estimates increase the value. Example increasing AGE from 25 to 26 will increase $\log(\text{FEV})$ by $0.023$. Similarily, for the binary predictor SMOKE, the coefficient estimate represent the change in the response when changing from non-smoker (0) to smoker (1), and is equal to $-0.046$. The intercept is the value of the response when all covariates are set to zero. This is not necessarily realistic, as there is no humans with e.g zero height.
 
 * `Std.Error`
 \newline 
 Estimated standard deviation of the estimated regression coefficients, i.e the average amount that the estimated regression coefficients vary from the actual value. The Std.Error is given by 
-$$\widehat{\text{SD}}(\hat{\beta_j}) = \sqrt{(\hat{\sigma}^2(X^TX})^{-1}_{jj})}$$, where $X$ is the design matrix of the regression, and $\hat{\sigma}$ is the residual standard error.
+$$
+\widehat{\text{SD}}(\hat{\beta_j}) = \sqrt{\hat{\sigma}^2(X^TX)^{-1}_{jj}},
+$$ where $X$ is the design matrix of the regression, and $\hat{\sigma}$ is the residual standard error.
 
 * `Residual standard error`
 \newline
 Estimate of the standard deviation of the error term $\epsilon$ in the regression model. The residual standard error is given by
-$$\hat{\sigma} = \frac{RSS}{n-p-1} = \frac{\sum_{i = 1}^n(Y_i - \hat{Y_i})^2}{n-p-1}$$, where n is the number of observations and p is the number of covariates (or predictors) in the fitted model. In our case, $n = 654$ and $p = 4$
+$$\hat{\sigma} = \frac{RSS}{n-p-1} = \frac{\sum_{i = 1}^n(Y_i - \hat{Y_i})^2}{n-p-1},$$ where n is the number of observations and p is the number of covariates (or predictors) in the fitted model. In our case, $n = 654$ and $p = 4$
 * `F-statistic`
 \newline
-The F-statistic is used to test the hypothesis that all estimated regression coefficients are zero, i.e to check whether there is a relationship between response and predictors.
+The F-statistic is used to test the hypothesis that all estimated regression coefficients are zero, i.e to check whether there is a relationship between response and predictors. It is computed by $$F = \frac{(\text{TSS}-\text{RSS})/p}{\hat{\sigma}},$$ where $$\text{TSS} = \sum_{i = 1}^n(y_i - \bar{y})^2.$$
+
 
 
 **Q3:** 
 \newline 
-The proportion of variability of the model fit is given by the $R^2$-statistic. The multiple $R^2$ will always increase with an increasing number of covariates, and might result in too optimistic model assessment.The adjusted $R^2$ takes this into account, and adjust according to the number of covaraites. Thus, the adjusted $R^2$-statistic is usually the preferred measure of explained variability in the fitted model when doing multiple linear regression.
+The proportion of variability of the model fit is given by the $R^2$-statistic, a number which lies between 0 and 1. The multiple $R^2$ will always increase with an increasing number of covariates, and might result in too optimistic model assessment.The adjusted $R^2$ takes this into account, and adjust according to the number of covaraites. Thus, the adjusted $R^2$-statistic is usually the preferred measure of explained variability in the fitted model when doing multiple linear regression.
 For model A, the multiple $R^2$ is 0.8106, while the adjusted $R^2$ is 0.8095. Thus, $81\%$ of the variability is explained in modelA.
 
 **Q4:**
 
-```{r,eval=TRUE}
+```{r,eval=TRUE,echo=FALSE}
 library(ggplot2)
 # residuls vs fitted
 ggplot(modelA, aes(.fitted, .stdresid)) + geom_point(pch = 21) +
@@ -88,13 +93,13 @@ The former plot showing residuals vs. fitted values looks good. The residuals ar
 
 As for the Q-Q plot, the data quantiles seems to bend away from the normal quantiles at the tails. That is, the residuals are heavy-tailed rather than being normally distributed.
 
-The normality test yields a low p-value, and the normality hypothesis is rejected.
+The Anderson-Darling test yields a low p-value, and the normality hypothesis is rejected.
 
 
 
 **Q5:** 
 
-```{r,eval=TRUE}
+```{r,eval=TRUE,echo=FALSE}
 modelB = lm(FEV ~ Age + Htcm + Gender + Smoke, data=lungcap)
 summary(modelB)
 
@@ -118,7 +123,9 @@ ggplot(modelB, aes(sample = .stdresid)) +
 library(nortest) 
 ad.test(rstudent(modelB))
 ```
-Looking at the residuals vs. fitted values plot, one can see that the residuals are heteroscedatic. There is also evidence of autocorrelated errors, as the residuals shows a non-linear explanatory trend. 
+Looking at the residuals vs. fitted values plot, one can see that the residuals are heteroscedatic. There is also evidence of autocorrelated errors, as the residuals shows a non-linear explanatory trend.
+
+Forslag: There also seems that the assumption of mean zero for the residuals do not hold for some fitted values.
 
 The Q-Q plot is similar for modelB as for modelA, i.e the residuals are not normally distributed as the model assumes.
 
@@ -126,7 +133,9 @@ As for model fit B, the Smoke covariate is no longer significant, as its corresp
 
 The standard error, or estimated standard deviation of the estimated regression coefficients, are lower in model A for all covarariates. These quantities are used in e.g constructing confidence intervals for the regression coefficients. As these are lower in model A, one will obtain more accurate confidence intervals for $\beta_j$ when using model A.
 
-When doing inference about FEV, the interpretation might be easier when using model B, but the accuracy is greater when using model A.
+When doing inference about FEV, the interpretation might be easier when using model B, but the accuracy is greater when using model A. 
+
+With all this taken into consideration, model A is preferred over model B.
 
 **Q6:** 
 Test if the covariate AGE has an effect on $\log(\text{FEV})$, i.e conduct the following hypothesis test
@@ -158,19 +167,21 @@ t_stat = summary(modelA)$coefficients['Age','t value']
 #calculate p-value from t-statistic
 p1_age = 2*pt(-abs(t_stat),df)
 
-ggplot(data.frame(x = t_dist)) + geom_density(aes(x = x),fill = 'aliceblue') + geom_vline(xintercept = mean(t_dist) + critical_values,color = 'red') +geom_vline(xintercept = t_stat,color = 'blue') + labs(subtitle = bquote(list(alpha ==.(alpha),df ==.(df))),title = 'T-distribution')
+#ggplot(data.frame(x = t_dist)) + geom_density(aes(x = x),fill = 'aliceblue') + geom_vline(xintercept = mean(t_dist) + critical_values,color = 'red') +geom_vline(xintercept = t_stat,color = 'blue') + labs(subtitle = bquote(list(alpha ==.(alpha),df ==.(df))),title = 'T-distribution')
 
 
 ```
 For a given significance level $\alpha$, the null-hypothesis is rejected if the p-value is less than $\alpha$. The p-value is 
-```{r,eval=TRUE,echo = FALSE}
+```{r,eval=TRUE}
 print('P-value from summary of the fitted model:')
 p_AGE
 print('P-value computed from the t-statistic:')
 p1_age
 ```
 Thus, the null-hypothesis is rejected for $\alpha \ge 7\cdot10^{-12}$. 
+<!--
 \newline As an example, observe in the above figure a student-t distribution with 649 degrees of freedom corresponding to the problem description. The critical values for a significance level $\alpha = 0.05$ is marked with red, vertical lines, whereas the t-statistic assuming the null-hypothesis is maarked with a blue line. The t-statistic is clearly within the rejection region, and the null-hypothesis is rejected. 
+-->
 
 **Q7:** 
 The $(1-\alpha)\%$ confidence interval (CI) for $\beta_{\text{Age}}$ for a given significance level $\alpha$ is given by
@@ -196,7 +207,7 @@ print("Numerically from formula:")
 CI
 ```
 Since the $99\%$ CI for $\beta_{\text{Age}}$ does not include $0$, the p-value is less than $\alpha = 0.01$.
-
+This is because zero is not included in the confidence interval and any value outside the interval has a p-value less than 0.01.
 **Q8:**
 Prediction of a 16 year old male that is 170cm and non-smoking
 ```{r,eval=TRUE}
@@ -213,8 +224,7 @@ fev.pred = f.exp(pred)
 fev.predint = predict(modelA,newdata = new, level = 0.95, interval = 'prediction')
 f.exp(fev.predint)
 ```
-Best prediction for $\log(\text{FEV})$ is 1.324. The $95\%$ prediction interval for the forced expiratory volume, FEV, of the new observation is $[2.812, 5.010]$.
-The prediction interval is too wide to be useful. A person with the given characteristic will on average have a $95\%$ chance of having a FEV between $2.8$ and $5.0$
+Best prediction for $\log(\text{FEV})$ is 1.324. The $95\%$ prediction interval for the forced expiratory volume, FEV, of the new observation is $[2.812, 5.010]$. A person with the given characteristic will on average have a $95\%$ chance of having a FEV between $2.8$ and $5.0$. This is quite a wide interval which does not yield much information.
 
 
 # Problem 2: Classification 
@@ -251,27 +261,25 @@ knn.train = Mdf[tr,]
 knn.test = Mdf[-tr,]
 
 K = 30
-train.error = rep(NA,K)
-test.error = rep(NA,K)
+train.e = rep(NA,K)
+test.e = rep(NA,K)
 for (k in 1:K){
   test.pred = class::knn(train = knn.train,test = knn.test,cl = knn.train$y,k = k)
   train.pred = class::knn(train = knn.train, test = knn.train, cl = knn.train$y, k =k)
-  test.error[k] = mean(test.pred != knn.test$y)
-  train.error[k] = mean(train.pred != knn.train$y)
+  test.e[k] = mean(test.pred != knn.test$y)
+  train.e[k] = mean(train.pred != knn.train$y)
 }
-train.e = train.error
-test.e = test.error
 
-train.error.df = data.frame(k=1:K, error = train.error)
-ggplot(train.error.df, aes(x=k, y=error))+geom_point(col="blue")+geom_line(linetype="dotted") + ggtitle('Misclassification rates KNN - Training data')
+#train.e.df = data.frame(k=1:K, e = train.e)
+#ggplot(train.e.df, aes(x=k, y=e))+geom_point(col="blue")+geom_line(linetype="dotted") + ggtitle('Misclassification rates KNN - Training data')
 
-test.error.df = data.frame(k=1:K, error = test.error)
-ggplot(test.error.df, aes(x=k, y=error))+geom_point(col="blue")+geom_line(linetype="dotted") + ggtitle('Misclassification rates KNN - Test data')
+#test.e.df = data.frame(k=1:K, e = test.e)
+#ggplot(test.e.df, aes(x=k, y=e))+geom_point(col="blue")+geom_line(linetype="dotted") + ggtitle('Misclassification rates KNN - Test data')
 
 ```
 
 
-```{r, eval=TRUE}
+```{r, eval=TRUE,echo=FALSE}
 set.seed(0)
 ks = 1:30 # Choose K from 1 to 30.
 idx = createFolds(M[tr,1], k=5) # Divide the training data into 5 folds.
@@ -317,7 +325,7 @@ lines(ks, test.e, type="o", pch = 16, ylim = c(0.5, 0.7), col = co[1])
 legend("topright", legend = c("Test", "5-fold CV", "Training"), lty = 1, col=co)
 ```
 
-In K-nearest neighbour, the degree of flexibility decrease with K. That is, the lower the K, the lower the bias. Therefore, the bias increase with K. According to the bias-variance tradeoff, the variance will decrease with K.
+In K-nearest neighbour, the degree of flexibility decrease with K. That is, the lower the K, the lower the bias. Therefore, the bias increase with K. However as the flexibility decrease so does the variance and therefore the variance decrease with K. This opposite behavior of the bias and the variance, as a function of K, is the reason for discussing the bias-variance tradeoff.
 
 **Q13:** 
 
@@ -339,7 +347,7 @@ legend("topleft", c("Player 1 wins", "Player 2 wins"),
 box()
 ```
 
-The strategy for finding K in the above code chunk is finding the greatest K in which the average K over all folds is less than the minimum K + its standard deviation.
+The strategy for finding K in the above code chunk is to first calculate the average and standard deviation of the minimum error, obtained using the optimal K. Then the average and standard deviation are summed together and K is selected as the greatest K that fulfills the requirement of having an average error that is below this sum.
 
 
 **Q14:** 
@@ -349,20 +357,6 @@ K= 30
 library(pROC)
 # knn with prob=TRUE outputs the probability of the winning class
 # therefore we have to do an extra step to get the probability of player 1 winning
-auc = rep(NA,K)
-for (k in 1:K){
-  KNNclass=class::knn(train=M[tr,-1], cl=M[tr,1], test=M[-tr,-1], k = k,prob=TRUE)
-  KNNprobwinning=attributes(KNNclass)$prob
-  KNNprob= ifelse(KNNclass == "0", 1-KNNprobwinning, KNNprobwinning)
-# now KNNprob has probability that player 1 wins, for all matches in the test set
-
-  KNN.roc = roc(response =M[-tr,1],predictor = KNNprob)
-  auc[k] = auc(KNN.roc)
-}
-print("Maximum Area under the curve")
-max(auc)
-print('Occuring at K = ')
-which(auc == max(auc))
 
 KNNclass=class::knn(train=M[tr,-1], cl=M[tr,1], test=M[-tr,-1], k = K,prob=TRUE)
 KNNprobwinning=attributes(KNNclass)$prob
@@ -373,11 +367,19 @@ plot(KNN.roc)
 print("K = 30")
 auc(KNN.roc)
 
+#trenger vi plot?
+
+
+
+
+
+
+#les dette
+  
+
 ```
 The ROC-curve is found by calculating the sensitivity and specificity of the model, where all possible values of the decicion thresholds are being considered (each point corresponds to a single threshold value). The AUC is the area under the ROC-curve, and a good classifier has a high value of AUC $\in[0,1]$.
 The AUC for K = 30, our choice from the previous question, is $0.8178$.
-
-We also found that K = 17 yields the optimal, or largest value for the AUC ($0.82003$) 
 
 The interpretation of the AUC is the proportion of time the model ranks a random positive observation (true positive) higher than a random negative (false positive) observation. 
 
@@ -432,11 +434,15 @@ Therefore, based on this metric, the argmax classifier is preferrable.
 
 
 **Q16:** 
+$\hat{\boldsymbol{\beta}}$ is given by
+\newline
 
 $$
 \hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{Y}
 $$
-Expected value
+\newline
+First, the expected value is calculated
+\newline
 $$
 \begin{aligned}
     E[\boldsymbol{\hat{\beta}}] &= E[(X^TX)^{-1})X^T\mathbf{Y}]\\
@@ -451,7 +457,8 @@ $$
 \end{aligned}
 $$
 Where we are assuming $\boldsymbol{\epsilon} \sim N(0,I\sigma^2)$.
-
+\newline
+Further, the covariance is calculated to be
 $$
 \begin{aligned}
 \text{Cov}[\boldsymbol{\hat{\beta}}] &= \text{Cov}[(X^TX)^{-1}X^T\mathbf{Y}]\\
@@ -464,21 +471,15 @@ $$
 &\\
 &= \sigma^2((X^TX)^{-1})^T\\
 &\\
-<<<<<<< HEAD
 &=\sigma^2(X^TX)^{-1}
-=======
-&= \sigma^2(X^TX)^{-1}
->>>>>>> e52cb009df1aa6fb8e23321975f6e8aa5436b166
 \end{aligned}
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
 
-
-
 **Q17:**
 Expected value and variance of $\hat{f}(\mathbf{x_0})$
 
-Expected value
+Expected value:
 $$
 \begin{aligned}
     E[\hat{f}(\boldsymbol{x_0})] &= E[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
@@ -488,7 +489,7 @@ $$
     &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
   \end{aligned}
 $$
-Variance
+Variance:
 $$
   \begin{aligned}
     \text{Var}[\hat{f}(\boldsymbol{x_0})] &= \text{Var}[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
@@ -497,12 +498,13 @@ $$
     &\\
     &= \boldsymbol{x_0}^T \sigma^2(X^TX)^{-1}\boldsymbol{x_0} \\
     &\\
-    &= \boldsymbol{x_0}^T(X^TX)^{-1}\boldsymbol{x_0} \sigma^2
+    &= \sigma^2 \boldsymbol{x_0}^T(X^TX)^{-1}\boldsymbol{x_0}
   \end{aligned}
 $$
 
 
 **Q18:** 
+We derive the expression for $\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]$ and then insert the expressions from earlier questions,
 $$
 \begin{aligned}
 \text{E}[(Y_0-\hat{f}({\bf x}_0))^2] &= \text{E}[(Y_0)^2-2Y_0\hat{f}({\bf x}_0) + \hat{f}({\bf x}_0)^2] \\
@@ -510,18 +512,18 @@ $$
 &= \text{Var}[Y_0] + \text{E}[(Y_0)]^2-2E[Y_0]E[\hat{f}({\bf x}_0)] + \text{Var}[\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)]^2 \\
 &= \text{Var}[Y_0] + f(x_0)^2-2f(x_0)E[\hat{f}({\bf x}_0)] + \text{Var}[\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)]^2 \\
 &= \text{Var}(\varepsilon) + \text{Var}[\hat{f}({\bf x}_0)] + (\text{E}[\hat{f}({\bf x}_0)]-f({\bf x}_0))^2 \\
-&= \text{Var}(\varepsilon) + \text{Var}[\hat{f}({\bf x}_0)] + [\text{Bias}(\hat{f}({\bf x}_0))]^2
+&= \sigma^2 + \sigma^2 \boldsymbol{x_0}^T(X^TX)^{-1}\boldsymbol{x_0} + (\boldsymbol{x_0^T}  \boldsymbol{\beta}-\boldsymbol{x_0^T}  \boldsymbol{\beta})^2 \\
+&= \sigma^2(1 + \boldsymbol{x_0}^T(X^TX)^{-1}\boldsymbol{x_0})
 \end{aligned}
 $$
 
-
+**Q19:** 
 The Ridge estimator is given as
+\newline
 $$
 \widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y}
 $$
-
-
-**Q19:** 
+\newline
 Expected value of the ridge estimator
 $$
 \begin{aligned}
