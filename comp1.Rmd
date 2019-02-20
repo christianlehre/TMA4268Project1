@@ -3,8 +3,7 @@ subtitle: "TMA4268 Statistical Learning V2019"
 title: "Compulsory exercise 1"
 author: "Christian Lehre, Axel R??nold & Erik B??e"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: 
-  #html_document
+output:
   pdf_document
 ---
   
