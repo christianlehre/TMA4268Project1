@@ -461,9 +461,11 @@ $$
 &\\
 &= (X^TX)^{-1}X^T\sigma^2I\bigg((X^TX)^{-1}X^T\bigg)^T\\
 &\\
-&= (X^TX)^{-1}(X^TX)(X^TX)^{-1}\sigma^2\\
+&= (X^TX)^{-1}(X^TX)((X^TX)^{-1})^T\sigma^2\\
 &\\
-&= \sigma^2(X^TX)^{-1}
+&= \sigma^2((X^TX)^{-1})^T\\
+&\\
+&=\sigma^2(X^TX)^{-1}
 \end{aligned}
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
@@ -597,11 +599,13 @@ sigma
 
 **Q22:** 
 
-```{r,eval=FALSE}
+```{r}
 sqbias=function(lambda,X,x0,beta)
 {
   p=dim(X)[2]
-  value= #HERE YOU FILL IN
+  #inv=solve(t(X)%*%X+lambda*diag(p))
+  #value=(t(x0)%*%inv%*%t(X)%*%X%*%beta-t(x0)%*%beta)^2
+  value=(t(x0)%*%(diag(p)+lambda*solve(t(X)%*%X))%*%beta-t(x0)%*%beta)^2
   return(value)
 }
 thislambda=seq(0,2,length=500)
@@ -612,24 +616,25 @@ plot(thislambda,sqbiaslambda,col=2,type="l")
 
 **Q23:** 
 
-```{r,eval=FALSE}
+```{r}
 variance=function(lambda,X,x0,sigma)
 {
   p=dim(X)[2]
   inv=solve(t(X)%*%X+lambda*diag(p))
-  value= sigma^2%*%t(x0)%*%inv%*%t(X)%*%X%*%inv%*%x0
+  value=sigma^2*t(x0)%*%inv%*%t(X)%*%X%*%t(inv)%*%x0
   return(value)
 }
 thislambda=seq(0,2,length=500)
 variancelambda=rep(NA,length(thislambda))
 for (i in 1:length(thislambda)) variancelambda[i]=variance(thislambda[i],X,x0,sigma)
 plot(thislambda,variancelambda,col=4,type="l")
+
 ```
 
 
 **Q24:** 
 
-```{r,eval=FALSE}
+```{r}
 tot=sqbiaslambda+variancelambda+sigma^2
 which.min(tot)
 thislambda[which.min(tot)]
@@ -639,6 +644,6 @@ lines(thislambda, variancelambda,col=4)
 lines(thislambda,rep(sigma^2,500),col="orange")
 abline(v=thislambda[which.min(tot)],col=3)
 ```
-
+We observe that the 35. lambda value 
 
 
