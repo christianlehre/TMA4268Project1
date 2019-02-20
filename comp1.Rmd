@@ -1,7 +1,7 @@
 ---
 subtitle: "TMA4268 Statistical Learning V2019"
 title: "Compulsory exercise 1"
-author: "Christian Lehre, Axel R??nold & Erik B??e"
+author: "Christian Lehre, Axel Rønold & Erik Bøe"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   pdf_document
@@ -447,15 +447,10 @@ $$
 &\\
 &= (X^TX)^{-1}(X^TX)((X^TX)^{-1})^T\sigma^2\\
 &\\
-<<<<<<< HEAD
 &= \sigma^2((X^TX)^{-1})^T\\
 &\\
-&=\sigma^2(X^TX)^{-1}
-\end{split}
-=======
 &= \sigma^2(X^TX)^{-1}
 \end{aligned}
->>>>>>> e3921ff946a17a1b95b31b6913d11e64b6efb41f
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
 
