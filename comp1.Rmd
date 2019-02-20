@@ -424,7 +424,7 @@ $$
 $$
 Expected value
 $$
-  \begin{split}
+\begin{aligned}
     E[\boldsymbol{\hat{\beta}}] &= E[(X^TX)^{-1})X^T\mathbf{Y}]\\
     &\\
     &= (X^TX)^{-1}X^TE[\mathbf{Y}]\\
@@ -434,12 +434,12 @@ $$
     &= (X^TX)^{-1}(X^TX)(E[\boldsymbol{\beta}] + E[\boldsymbol{\epsilon}])\\
     &\\
     &= \boldsymbol{\beta}
-  \end{split}
+\end{aligned}
 $$
 Where we are assuming $\boldsymbol{\epsilon} \sim N(0,I\sigma^2)$.
 
 $$
-\begin{split}
+\begin{aligned}
 \text{Cov}[\boldsymbol{\hat{\beta}}] &= \text{Cov}[(X^TX)^{-1}X^T\mathbf{Y}]\\
 &\\
 &= (X^TX)^{-1}X^T\text{Cov}[\mathbf{Y}]\bigg((X^TX)^{-1}X^T\bigg)^T\\
@@ -448,40 +448,129 @@ $$
 &\\
 &= (X^TX)^{-1}(X^TX)((X^TX)^{-1})^T\sigma^2\\
 &\\
+<<<<<<< HEAD
 &= \sigma^2((X^TX)^{-1})^T\\
 &\\
 &=\sigma^2(X^TX)^{-1}
 \end{split}
+=======
+&= \sigma^2(X^TX)^{-1}
+\end{aligned}
+>>>>>>> e3921ff946a17a1b95b31b6913d11e64b6efb41f
 $$
 where we have used $\text{Cov}[\mathbf{Y}] = \sigma^2I$.
+
+
+
 **Q17:**
+Expected value and variance of $\hat{f}(\mathbf{x_0})$
+
+Expected value
 $$
-  \begin{split}
+\begin{aligned}
     E[\hat{f}(\boldsymbol{x_0})] &= E[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
     &\\
     &= x_0^T E[\boldsymbol{\boldsymbol{\hat{\beta}}}] \\
+    &\\
     &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
-  \end{split}
+  \end{aligned}
 $$
+Variance
+$$
+  \begin{aligned}
+    \text{Var}[\hat{f}(\boldsymbol{x_0})] &= \text{Var}[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
+    &\\
+    &= x_0^T \text{Var}[\boldsymbol{\boldsymbol{\hat{\beta}}}]x_0 \\
+    &\\
+    &= x_0^T \sigma^2(X^TX)^{-1}x_0 \\
+    &\\
+    &= x_0^T(X^TX)^{-1}x_0 \sigma^2
+  \end{aligned}
+$$
+
 
 **Q18:** 
 $$
-\text{E}[(Y_0-\hat{f}({\bf x}_0))^2]=[\text{E}(\hat{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\hat{f}({\bf x}_0) ) + \text{Var}(\varepsilon)
+\begin{aligned}
+\text{E}[(Y_0-\hat{f}({\bf x}_0))^2] &= \text{E}[(Y_0)^2-2Y_0\hat{f}({\bf x}_0) + \hat{f}({\bf x}_0)^2] \\
+&= \text{E}[(Y_0)^2]-2E[Y_0\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)^2] \\
+&= \text{Var}[Y_0] + \text{E}[(Y_0)]^2-2E[Y_0]E[\hat{f}({\bf x}_0)] + \text{Var}[\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)]^2 \\
+&= \text{Var}[Y_0] + f(x_0)^2-2f(x_0)E[\hat{f}({\bf x}_0)] + \text{Var}[\hat{f}({\bf x}_0)] + E[\hat{f}({\bf x}_0)]^2 \\
+&= \text{Var}(\varepsilon) + \text{Var}[\hat{f}({\bf x}_0)] + (\text{E}[\hat{f}({\bf x}_0)]-f({\bf x}_0))^2 \\
+&= \text{Var}(\varepsilon) + \text{Var}[\hat{f}({\bf x}_0)] + [\text{Bias}(\hat{f}({\bf x}_0))]^2
+\end{aligned}
 $$
 
 
-Ridge estimator:
+The Ridge estimator is given as
 $$
 \widetilde{\boldsymbol \beta}=({\bf X}^T{\bf X}+\lambda {\bf I})^{-1}{\bf X}^T{\bf Y}
 $$
 
+
 **Q19:** 
-spørsmål 19 er bra
+Expected value of the ridge estimator
+$$
+\begin{aligned}
+E[\widetilde{\boldsymbol{\beta}}] &= E[({ X}^T{ X}+\lambda { I})^{-1}{ X}^T{\bf Y}] \\
+&\\
+&= ({ X}^T{ X}+\lambda { I})^{-1}{ X}^TE[{\bf Y}] \\
+&\\
+&=({X}^T{X}+\lambda {I})^{-1}{X}^TX\boldsymbol{\beta}
+\end{aligned}
+$$
+Covariance of the ridge estimator
+$$
+\begin{aligned}
+\text{Cov}[\widetilde{\boldsymbol{\beta}}] &= \text{Cov}[({ X}^T{ X}+\lambda { I})^{-1}{ X}^T{\bf Y}]\\
+&\\
+&= ({ X}^T{ X}+\lambda { I})^{-1}{ X}^T\text{Cov}[{\bf Y}]\bigg(({ X}^T{ X}+\lambda { I})^{-1}{ X}^T\bigg)^{T} \\
+&\\
+&= ({ X}^T{ X}+\lambda { I})^{-1}{ X}^T\sigma^2IX\bigg(({ X}^T{ X}+\lambda { I})^{T}\bigg)^{-1}
+&\\
+&= \sigma^2(X^TX + \lambda I)^{-1}X^TX(X^TX+\lambda I)^{-1}\\
+&\\
+\end{aligned}
+$$
+
 **Q20:** 
+Expected value and variance of $\widetilde{f}(\mathbf{x_o}) = \mathbf{x_0}^T\widetilde{\boldsymbol{\beta}}$
+Expected value
+$$
+\begin{aligned}
+E[\widetilde{f}(\mathbf{x_o})] &= E[\mathbf{x_0^T\widetilde{\boldsymbol{\beta}}}] \\
+&\\
+&= \mathbf{x_0^T}E[\widetilde{\boldsymbol{\beta}}]\\
+&\\
+&= \mathbf{x_0}^T(X^TX + \lambda I)^{-1}X^TX\boldsymbol{\beta}
+\end{aligned}
+$$
+
+Variance
+$$
+\begin{aligned}
+\text{Var}[\widetilde{f}(\mathbf{x_0})] &= \text{Var}[\mathbf{x_0}^T\widetilde{\boldsymbol{\beta}}] \\
+&\\
+&= \mathbf{x_0}^T\text{Var}[\widetilde{\boldsymbol{\beta}}] \\
+&\\
+&= \sigma^2\mathbf{x_0}^T(X^TX+\lambda I)^{-1}X^TX(X^TX + \lambda I)^{-1}\mathbf{x_0}
+\end{aligned}
+$$
+
+
 
 **Q21:** 
-$$\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2]=[\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)$$
 
+$$
+\begin{aligned}
+\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2] &= \text{E}[(Y_0)^2-2Y_0\widetilde{f}({\bf x}_0) + \widetilde{f}({\bf x}_0)^2] \\
+&= \text{E}[(Y_0)^2]-2E[Y_0\widetilde{f}({\bf x}_0)] + E[\widetilde{f}({\bf x}_0)^2] \\
+&= \text{Var}[Y_0] + \text{E}[(Y_0)]^2-2E[Y_0]E[\widetilde{f}({\bf x}_0)] + \text{Var}[\widetilde{f}({\bf x}_0)] + E[\widetilde{f}({\bf x}_0)]^2 \\
+&= \text{Var}[Y_0] + f(x_0)^2-2f(x_0)E[\widetilde{f}({\bf x}_0)] + \text{Var}[\widetilde{f}({\bf x}_0)] + E[\widetilde{f}({\bf x}_0)]^2 \\
+&= \text{Var}(\varepsilon) + \text{Var}[\widetilde{f}({\bf x}_0)] + (\text{E}[\widetilde{f}({\bf x}_0)]-f({\bf x}_0))^2 \\
+&= [\text{E}(\widetilde{f}({\bf x}_0)-f({\bf x}_0)]^2+\text{Var}(\widetilde{f}({\bf x}_0) ) + \text{Var}(\varepsilon)
+\end{aligned}
+$$
 
 ```{r}
 values=dget("https://www.math.ntnu.no/emner/TMA4268/2019v/data/BVtradeoffvalues.dd")
@@ -496,7 +585,6 @@ sigma
 
 ```
 
-Hint: we perform matrix multiplication using `%*%`, transpose of a matrix `A` with `t(A)` and inverse with `solve(A)`. 
 
 **Q22:** 
 
