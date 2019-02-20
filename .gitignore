@@ -5,7 +5,10 @@
 .pdf
 =======
 
+<<<<<<< HEAD
+=======
 *.pdf
+>>>>>>> e3921ff946a17a1b95b31b6913d11e64b6efb41f
 
 >>>>>>> e3921ff946a17a1b95b31b6913d11e64b6efb41f
 # Session Data files
