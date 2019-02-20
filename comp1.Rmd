@@ -603,9 +603,7 @@ sigma
 sqbias=function(lambda,X,x0,beta)
 {
   p=dim(X)[2]
-  #inv=solve(t(X)%*%X+lambda*diag(p))
-  #value=(t(x0)%*%inv%*%t(X)%*%X%*%beta-t(x0)%*%beta)^2
-  value=(t(x0)%*%(diag(p)+lambda*solve(t(X)%*%X))%*%beta-t(x0)%*%beta)^2
+  value=(t(x0)%*%solve(diag(p)+lambda*solve(t(X)%*%X))%*%beta-t(x0)%*%beta)^2
   return(value)
 }
 thislambda=seq(0,2,length=500)
@@ -644,6 +642,6 @@ lines(thislambda, variancelambda,col=4)
 lines(thislambda,rep(sigma^2,500),col="orange")
 abline(v=thislambda[which.min(tot)],col=3)
 ```
-We observe that the 35. lambda value 
+We observe that the 249th lambda value in the thislambda-vector yields the lowest value for the total value of $\text{E}[(Y_0-\widetilde{f}({\bf x}_0))^2]$. This corresponds to $\lambda = 0.998 \approx 1$.
 
 
