@@ -25,7 +25,8 @@ modelA = lm(log(FEV) ~ Age + Htcm + Gender + Smoke, data=lungcap)
 summary(modelA)
 ```
 
-**Q1:** \newline
+**Q1:** 
+
 Model A:
 $$ \log(\text{FEV}) = \beta_0 + \beta_1AGE + \beta_2HTCM +\beta_3GENDERM  +
 \beta_4SMOKE + \varepsilon$$
@@ -58,6 +59,7 @@ The F-statistic is used to test the hypothesis that all estimated regression coe
 **Q3:** 
 \newline 
 The proportion of variability of the model fit is given by the $R^2$-statistic. The multiple $R^2$ will always increase with an increasing number of covariates, and might result in too optimistic model assessment.The adjusted $R^2$ takes this into account, and adjust according to the number of covaraites. Thus, the adjusted $R^2$-statistic is usually the preferred measure of explained variability in the fitted model when doing multiple linear regression.
+For model A, the multiple $R^2$ is 0.8106, while the adjusted $R^2$ is 0.8095. Thus, $81\%$ of the variability is explained in modelA.
 
 **Q4:**
 
@@ -83,11 +85,13 @@ library(nortest)
 ad.test(rstudent(modelA))
 ```
 In this problem we consider two diagnostic plots, namely residuals vs. fitted values and the Q-Q plot. 
-The former plot showing residuals vs. fitted values looks good. The residuals are spread seemingly random, and there is no evidence of a  non-linear relationship between the response and predictors. Thus, the model is good.
+The former plot showing residuals vs. fitted values looks good. The residuals are spread seemingly random, and the model seems to have homoscedatic error variances. There is no evidence of correlated errors, so the model seems to include all explanatory factors (the residuals contains no predictive features).
 
-As for the Q-Q plot, the data quantiles seems to bend away from the normal quantiles at the tails. That is, the residuals are heavy-tailed rather than being noramlly distributed.
+As for the Q-Q plot, the data quantiles seems to bend away from the normal quantiles at the tails. That is, the residuals are heavy-tailed rather than being normally distributed.
 
 The normality test yields a low p-value, and the normality hypothesis is rejected.
+
+
 
 **Q5:** 
 
@@ -115,7 +119,9 @@ ggplot(modelB, aes(sample = .stdresid)) +
 library(nortest) 
 ad.test(rstudent(modelB))
 ```
-Looking at the residuals vs. fitted values plot, one can see that the spread is uneven and that there is a non-linear relationship between the response and the covariates. 
+Looking at the residuals vs. fitted values plot, one can see that the residuals are heteroscedatic. There is also evidence of autocorrelated errors, as the residuals shows a non-linear explanatory trend. 
+
+The Q-Q plot is similar for modelB as for modelA, i.e the residuals are not normally distributed as the model assumes.
 
 As for model fit B, the Smoke covariate is no longer significant, as its corresponding p-value is relatively large. The coefficient of determination, $R^2$, which is a measure of the explained variability of the model, is also lower for model B than model A. In other words, model A explains a greater proportion of variability than model B.
 
@@ -164,8 +170,8 @@ p_AGE
 print('P-value computed from the t-statistic:')
 p1_age
 ```
-Thus, the null-hypothesis is rejected for $\alpha \ge 7\cdot10^{-12}$
-Observe in the above figure a student-t distribution with 649 degrees of freedom, corresponding to the problem description. The critical values for a significance level $\alpha = 0.05$ is marked with red, vertical lines, whereas the t-statistic assuming the null-hypothesis is maarked with a blue line. The t-statistic is clearly within the rejection region, and the null-hypothesis is rejected. 
+Thus, the null-hypothesis is rejected for $\alpha \ge 7\cdot10^{-12}$. 
+\newline As an example, observe in the above figure a student-t distribution with 649 degrees of freedom corresponding to the problem description. The critical values for a significance level $\alpha = 0.05$ is marked with red, vertical lines, whereas the t-statistic assuming the null-hypothesis is maarked with a blue line. The t-statistic is clearly within the rejection region, and the null-hypothesis is rejected. 
 
 **Q7:** 
 The $(1-\alpha)\%$ confidence interval (CI) for $\beta_{\text{Age}}$ for a given significance level $\alpha$ is given by
@@ -173,10 +179,12 @@ The $(1-\alpha)\%$ confidence interval (CI) for $\beta_{\text{Age}}$ for a given
 $$
 [\hat{\beta}-t_{\frac{\alpha}{2},n-p-1}\hat{SD}(\hat{\beta}),\hat{\beta}+t_{\frac{\alpha}{2},n-p-1}\hat{SD}(\hat{\beta})]
 $$
+
 ```{r,eval=TRUE}
 #99% confidence interval for beta_Age
 betahat = summary(modelA)$coefficients['Age','Estimate']
 sd = summary(modelA)$coefficients['Age','Std. Error']
+alpha = 0.01
 ta2 = qt(alpha/2, df)
 UCI = betahat + ta2*sd
 LCI = betahat - ta2*sd
@@ -197,17 +205,17 @@ new = data.frame(Age=16, Htcm=170, Gender="M", Smoke=0)
 pred = predict(modelA,newdata = new, type = 'response')
 # Construct 95% prediction interval for FEV, note that modelA's response is log(FEV)
 pred
+
 f.exp = function(x){
   return (exp(x))
 }
-
 fev.pred = f.exp(pred)
 
 fev.predint = predict(modelA,newdata = new, level = 0.95, interval = 'prediction')
 f.exp(fev.predint)
 ```
 Best prediction for $\log(\text{FEV})$ is 1.324. The $95\%$ prediction interval for the forced expiratory volume, FEV, of the new observation is $[2.812, 5.010]$.
-The prediction interval is too wide to be useful. A person with the given characteristic will on average have a $95\%$ chance of having a FEV between 2.8 and 5.0
+The prediction interval is too wide to be useful. A person with the given characteristic will on average have a $95\%$ chance of having a FEV between $2.8$ and $5.0$
 
 
 # Problem 2: Classification 
@@ -290,7 +298,10 @@ cv = sapply(ks, function(k){
 ```{r, eval=TRUE}
 cv.e = colMeans(cv)
 cv.se = apply(cv,2,sd)
+
 k.min = which.min(cv.e)
+print('K corresponding to the smallest CV error:')
+k.min
 ```
 
 **Q12:** 
@@ -306,6 +317,7 @@ lines(ks, train.e, type="o", pch = 16, ylim = c(0.5, 0.7), col = co[3])
 lines(ks, test.e, type="o", pch = 16, ylim = c(0.5, 0.7), col = co[1])
 legend("topright", legend = c("Test", "5-fold CV", "Training"), lty = 1, col=co)
 ```
+
 In K-nearest neighbour, the degree of flexibility decrease with K. That is, the lower the K, the lower the bias. Therefore, the bias increase with K. According to the bias-variance tradeoff, the variance will decrease with K.
 
 **Q13:** 
@@ -327,6 +339,7 @@ legend("topleft", c("Player 1 wins", "Player 2 wins"),
        col=c("red", "black"), pch=1)
 box()
 ```
+
 The strategy for finding K in the above code chunk is finding the greatest K in which the average K over all folds is less than the minimum K + its standard deviation.
 
 
@@ -362,10 +375,10 @@ print("K = 30")
 auc(KNN.roc)
 
 ```
-The ROC-curve is found by calculating the sensitivity and specificity of the model, where all possible values of the decicion thresholds are being considered. The AUC is the area under the ROC-curve, and a good classifier has a high value of AUC $\in[0,1]$.
+The ROC-curve is found by calculating the sensitivity and specificity of the model, where all possible values of the decicion thresholds are being considered (each point corresponds to a single threshold value). The AUC is the area under the ROC-curve, and a good classifier has a high value of AUC $\in[0,1]$.
 The AUC for K = 30, our choice from the previous question, is $0.8178$.
 
-We also found that K = 17 yields the optimal, or largest value for the AUC. 
+We also found that K = 17 yields the optimal, or largest value for the AUC ($0.82003$) 
 
 The interpretation of the AUC is the proportion of time the model ranks a random positive observation (true positive) higher than a random negative (false positive) observation. 
 
@@ -411,7 +424,9 @@ argmax.misclasserror = (table2[1,2] + table2[2,1])/sum(table2)
 argmax.misclasserror 
 
 ```
-We see that the argmax classifier yields a lower misclassification error on the test set, i.e the argmax classifier is preferrable.
+
+We see that the argmax classifier yields a lower misclassification error on the test set, i.e the argmax classifies to the correct class a greater proportion of time.
+Therefore, based on this metric, the argmax classifier is preferrable.
 
 
 # Problem 3: Bias-variance trade-off 
@@ -463,7 +478,7 @@ $$
 \begin{aligned}
     E[\hat{f}(\boldsymbol{x_0})] &= E[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
     &\\
-    &= x_0^T E[\boldsymbol{\boldsymbol{\hat{\beta}}}] \\
+    &= \boldsymbol{x_0}^T E[\boldsymbol{\boldsymbol{\hat{\beta}}}] \\
     &\\
     &= \boldsymbol{x_0^T}  \boldsymbol{\beta}
   \end{aligned}
@@ -473,11 +488,11 @@ $$
   \begin{aligned}
     \text{Var}[\hat{f}(\boldsymbol{x_0})] &= \text{Var}[\boldsymbol{x_0^T \boldsymbol{\hat{\beta}}}]\\
     &\\
-    &= x_0^T \text{Var}[\boldsymbol{\boldsymbol{\hat{\beta}}}]x_0 \\
+    &= \boldsymbol{x_0}^T \text{Var}[\boldsymbol{\boldsymbol{\hat{\beta}}}]\boldsymbol{x_0} \\
     &\\
-    &= x_0^T \sigma^2(X^TX)^{-1}x_0 \\
+    &= \boldsymbol{x_0}^T \sigma^2(X^TX)^{-1}\boldsymbol{x_0} \\
     &\\
-    &= x_0^T(X^TX)^{-1}x_0 \sigma^2
+    &= \boldsymbol{x_0}^T(X^TX)^{-1}\boldsymbol{x_0} \sigma^2
   \end{aligned}
 $$
 
@@ -519,7 +534,7 @@ $$
 &\\
 &= ({ X}^T{ X}+\lambda { I})^{-1}{ X}^T\text{Cov}[{\bf Y}]\bigg(({ X}^T{ X}+\lambda { I})^{-1}{ X}^T\bigg)^{T} \\
 &\\
-&= ({ X}^T{ X}+\lambda { I})^{-1}{ X}^T\sigma^2IX\bigg(({ X}^T{ X}+\lambda { I})^{T}\bigg)^{-1}
+&= ({ X}^T{ X}+\lambda { I})^{-1}{ X}^T\sigma^2IX\bigg(({ X}^T{ X}+\lambda { I})^{T}\bigg)^{-1}\\
 &\\
 &= \sigma^2(X^TX + \lambda I)^{-1}X^TX(X^TX+\lambda I)^{-1}\\
 &\\
@@ -528,6 +543,7 @@ $$
 
 **Q20:** 
 Expected value and variance of $\widetilde{f}(\mathbf{x_o}) = \mathbf{x_0}^T\widetilde{\boldsymbol{\beta}}$
+
 Expected value
 $$
 \begin{aligned}
@@ -601,7 +617,7 @@ variance=function(lambda,X,x0,sigma)
 {
   p=dim(X)[2]
   inv=solve(t(X)%*%X+lambda*diag(p))
-  value=#HERE YOU FILL IN
+  value= sigma^2%*%t(x0)%*%inv%*%t(X)%*%X%*%inv%*%x0
   return(value)
 }
 thislambda=seq(0,2,length=500)
